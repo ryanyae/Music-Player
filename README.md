@@ -15,7 +15,8 @@ projects and the fact that this system will be able to manage a bigger scale of 
 
 
 ### **TASK 3**
-* As a user I want to be able to check passenger in at the front desk, or at any checkpoint.
+* As a user I want to be able to check passenger in at the front desk, or at any
+  checkpoint.
 * As a user i want to abe to see which checkpoints people have been through.
 * As a user I want to be able to block some people at certain checkpoints
 * As a user I want to be able to put some passengers to a priority list
