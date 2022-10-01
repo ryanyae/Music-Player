@@ -15,11 +15,8 @@ projects and the fact that this system will be able to manage a bigger scale of 
 
 
 ### **TASK 3**
-* People can check in at the front desk
-  * There will sections in the airport (international, domestic)
-    * Some airports will be both domestic and international, or one or the other
-      * Handle cases where people come to the wrong airport
-* After they've checked in it will track in which checkpoints the person has gone through
+* As a user I want to be able to check passenger in at the front desk, or at any checkpoint.
+* As a user i want to abe to see which checkpoints people have been through.
 * As a user I want to be able to block some people at certain checkpoints
-* As a user I want to be able to certain passengers to a priority list
+* As a user I want to be able to put certain passengers to a priority list
 
