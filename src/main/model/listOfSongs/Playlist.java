@@ -17,6 +17,7 @@ public class Playlist implements listOfSongs {
         this.songsInAlbum = songsInAlbum;
     }
 
+    // EFFECTS: returns maker of the playlist
     @Override
     public Artist getArtist() {
         return artist;
