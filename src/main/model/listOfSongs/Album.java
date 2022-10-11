@@ -2,21 +2,20 @@ package model.listOfSongs;
 
 import model.Artist;
 import model.playable.Playable;
+import model.playable.Song;
 
 import java.util.ArrayList;
 
-public class Album implements listOfSongs {
+public class Album implements ListOfSongs {
 
     String albumName;
     Artist artist;
-    String title;
 
     ArrayList<Playable> songsInAlbum;
 
-    public Album(Artist a, String albumName, String title, ArrayList<Playable> songsInAlbum) {
+    public Album(Artist a, String albumName, ArrayList<Playable> songsInAlbum) {
         this.artist = a;
         this.albumName = albumName;
-        this.title = title;
         this.songsInAlbum = songsInAlbum;
     }
 
@@ -27,12 +26,17 @@ public class Album implements listOfSongs {
 
     @Override
     public String getPlaylistTitle() {
-        return title;
+        return albumName;
     }
 
     @Override
     public ArrayList<Playable> getListOfSongs() {
         return songsInAlbum;
+    }
+
+    @Override
+    public void addToListOfSongs(Song song) {
+        songsInAlbum.add(song);
     }
 
     @Override

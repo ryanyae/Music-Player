@@ -10,10 +10,11 @@ public class Song implements Playable {
 
     private Album album;
 
-    public Song(Artist maker, String title, String filePath) {
+    public Song(Artist maker, String title, String filePath, Album album) {
         this.artist = maker;
         this.title = title;
         this.filePath = filePath;
+        this.album = album;
     }
 
     @Override
@@ -33,6 +34,6 @@ public class Song implements Playable {
 
     @Override
     public Album getAlbum() {
-        return null;
+        return album;
     }
 }

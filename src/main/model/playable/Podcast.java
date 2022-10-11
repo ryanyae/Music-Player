@@ -30,4 +30,5 @@ public class Podcast implements Playable {
     public Album getAlbum() {
         return album;
     }
+
 }
