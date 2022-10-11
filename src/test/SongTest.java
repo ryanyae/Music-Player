@@ -16,6 +16,8 @@ class SongTest {
 
     private Artist artistTest2;
 
+    private Artist artistTest3;
+
     private Song songTest1;
 
     private Song songTest2;
@@ -31,15 +33,15 @@ class SongTest {
         artistTest1 = new Artist("Riot Games");
         songTest1 =  new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav", albumTest1);
         albumTest1 = new Album(artistTest1, "Legends Album",
-                new ArrayList<Playable>(Arrays.asList(songTest1)));
+                new ArrayList<>(Arrays.asList(songTest1)));
 
         artistTest2 = new Artist("Dua Lipa");
         songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
-        songTest3 = new Song(artistTest2, "Levitating", "stub", albumTest2);
+        songTest3 = new Song(artistTest2, "Levitating", "./resources/Dua Lipa - Levitating", albumTest2);
         albumTest2 = new Album(artistTest2, "Future Nostalgia",
-                new ArrayList<Playable>(Arrays.asList(songTest2, songTest3)));
+                new ArrayList<>(Arrays.asList(songTest2, songTest3)));
 
-
+        artistTest3 = new Artist("DaBaby");
     }
 
     @Test
@@ -57,6 +59,12 @@ class SongTest {
         assertEquals(songTest3.getFilePath(), "stub");
     }
 
+    @Test
+    void addFeatureTest() {
+        songTest3.addFeature(artistTest3);
+
+        assertEquals(songTest3.getFeatures(), new ArrayList<>(Arrays.asList(artistTest3)));
+    }
 
 }
 

@@ -40,28 +40,24 @@ public class ArtistTest {
 
         songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav",
                 albumTest1);
-        arrayListTest1 = new ArrayList<>(Arrays.asList(songTest1));
-        albumTest1 = new Album(artistTest1, "Album Test 1", arrayListTest1);
+        albumTest1 = new Album(artistTest1, "Album Test 1", new ArrayList<>(Arrays.asList(songTest1)));
         artistTest1.newAlbumsMade(albumTest1);
 
 
         songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
-        arrayListTest2 = new ArrayList<>(Arrays.asList(songTest2));
-        albumTest2 = new Album(artistTest2, "Album Test 2", arrayListTest2);
+        albumTest2 = new Album(artistTest2, "Album Test 2", new ArrayList<>(Arrays.asList(songTest2)));
         artistTest2.newAlbumsMade(albumTest2);
 
 
 
         songTest4 = new Song(artistTest1, "Awaken", "stub", albumTest4);
-        arrayListTest3 = new ArrayList<>(Arrays.asList(songTest4));
-        albumTest3 = new Album(artistTest1, "Album Test 3", arrayListTest3);
+        albumTest3 = new Album(artistTest1, "Album Test 3", new ArrayList<>(Arrays.asList(songTest4)));
         artistTest1.newAlbumsMade(albumTest3);
 
 
         songTest3 = new Song(artistTest2, "Levitating", "stub", albumTest3);
         songTest5 = new Song(artistTest2, "Future Nostalgia", "stub", albumTest3);
-        arrayListTest4 = new ArrayList<>(Arrays.asList(songTest3, songTest5));
-        albumTest4 = new Album(artistTest2, "Album Test 4", arrayListTest4);
+        albumTest4 = new Album(artistTest2, "Album Test 4", new ArrayList<>(Arrays.asList(songTest3, songTest5)));
         artistTest2.newAlbumsMade(albumTest4);
 
     }

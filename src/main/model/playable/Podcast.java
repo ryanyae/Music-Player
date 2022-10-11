@@ -3,13 +3,22 @@ package model.playable;
 import model.Artist;
 import model.listOfSongs.Album;
 
+import java.util.ArrayList;
+
 public class Podcast implements Playable {
 
     private String title;
     private Artist artist;
     private String filePath;
 
-    private Album album;
+    ArrayList<Artist> featuredArtists;
+
+    public Podcast(Artist maker, String title, String filePath) {
+        this.artist = maker;
+        this.title = title;
+        this.filePath = filePath;
+        featuredArtists = new ArrayList<>();
+    }
 
     @Override
     public Artist getArtist() {
@@ -27,8 +36,13 @@ public class Podcast implements Playable {
     }
 
     @Override
-    public Album getAlbum() {
-        return album;
+    public void addFeature(Artist artist) {
+
+    }
+
+    @Override
+    public ArrayList<Artist> getFeatures() {
+        return featuredArtists;
     }
 
 }

@@ -1,20 +1,20 @@
-# Airport Project
-## Track people throughout the airport
+# Music Player Project
+## Being able to play music
 
 
 
 ### **TASK 2**
-My project will be of an airport tracking application, **tracking passengers** throughout the
-entire airport. It will simulate many scenarios how passengers can interact with different
-checkpoints throughout the entire airport, checking in with their flights, if they've gone
-through security yet, etc. People that will use this will be airports such as the **YVR**, **YYC**, etc.
-This project is of interest as it will give experience in trying to create large scaled
-projects and the fact that this system will be able to manage a bigger scale of data.
 
+My project will be of a **music playing application**. Range of people will be able to use my application ranging 
+music enthusiasts to those periodic listeners. In a perfect world this would be the place where you favourite 
+artists will be able to release their new albums, singles, etc. But this application is not so much about the 
+artists, but for the user and their overall experience. This project interests me because I have a big
+passion for **software engineering** and just the realm of coding in general. I have done other personal projects, 
+for now, only consists of fully functional websites hand typed by me :). I am hoping with this project that I am
+able to expand my grasp on software engineering and make something other than a website.
 
 ### **TASK 3**
-* As a user I want to be able to check passengers in at the front desk, or at any
-  checkpoint.
-* As a user I want to abe to see which checkpoints people have been through which ever gate.
-* As a user I want to be able to put some passengers to a priority seating list
-* As a user I want to be able to book new passengers on the airplane
+* As a user I want to be able to add songs to my playlist.
+* As a user I want to be able to make new playlists.
+* As a user I want to be able to pause my music whenever I want.
+* As a user I want to be able to skip songs.

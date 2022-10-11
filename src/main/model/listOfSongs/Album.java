@@ -43,4 +43,6 @@ public class Album implements ListOfSongs {
     public int getPlaylistLength() {
         return songsInAlbum.size();
     }
+
+
 }
