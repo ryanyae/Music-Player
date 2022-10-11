@@ -7,7 +7,6 @@ import model.playable.Song;
 import java.util.ArrayList;
 
 public interface ListOfSongs {
-    Artist getArtist();
 
     int getPlaylistLength();
 

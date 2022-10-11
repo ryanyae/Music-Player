@@ -6,6 +6,8 @@ import model.playable.Song;
 
 import java.util.ArrayList;
 
+// Represents that can make podcasts and songs, they are also able to make albums that are an accumulation of songs
+// that the artist have made.
 public class Artist {
     ArrayList<Playable> songsMade;
 

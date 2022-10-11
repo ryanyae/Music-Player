@@ -7,26 +7,19 @@ import model.playable.Song;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Represents a playlist that a user made, with given title. The user can freely play songs from this playlist.
+// Is the accumulation of songs made by the user.
 public class Playlist implements ListOfSongs {
-    Artist artist;
     String title;
 
-    ArrayList<Playable> songsInAlbum;
+    ArrayList<Playable> songsInAlbum = new ArrayList<>();
 
-    public Playlist(Artist a, String title, ArrayList<Playable> songsInAlbum) {
-        this.artist = a;
+    public Playlist(String title) {
         this.title = title;
-        this.songsInAlbum = songsInAlbum;
     }
 
     public void addSong(Song song) {
         songsInAlbum.add(song);
-    }
-
-    // EFFECTS: returns maker of the playlist
-    @Override
-    public Artist getArtist() {
-        return artist;
     }
 
     @Override
@@ -51,7 +44,7 @@ public class Playlist implements ListOfSongs {
 
 
     public void deleteSongFromList(Song song) {
-
+        songsInAlbum.remove(song);
     }
 
     // MODIFIES: this

@@ -5,6 +5,7 @@ import model.listOfSongs.Album;
 
 import java.util.ArrayList;
 
+// Represents a Playable Podcast, different in the terms that this is not a song, but a podcast.
 public class Podcast implements Playable {
 
     private String title;

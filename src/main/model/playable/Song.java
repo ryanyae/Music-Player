@@ -5,6 +5,7 @@ import model.listOfSongs.Album;
 
 import java.util.ArrayList;
 
+// Represents a song made by an artist
 public class Song implements Playable {
     private Artist artist;
     private String title;
