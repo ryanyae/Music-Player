@@ -13,7 +13,7 @@ public class Album implements ListOfSongs {
     Artist artist;                                     // Artist that made the album
     ArrayList<Playable> songsInAlbum;                  // Songs that are in the album
 
-    // REQUIRES: albumName to be of a non-zero length
+    // REQUIRES: albumName to be of a non-zero length, and songsInAlbum to be > 0
     // EFFECTS: artist that created the album is set by given a, songs that are in the album
     //          is set by songsInAlbum, and the name of the Album is set by albumName.
     public Album(Artist a, String albumName, ArrayList<Playable> songsInAlbum) {

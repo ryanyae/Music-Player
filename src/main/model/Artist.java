@@ -33,11 +33,16 @@ public class Artist {
         songsMade.add(song);
     }
 
-    public void newAlbumsMade(Album album) {
-        albumsMade.add(album);
-        for (Playable song:album.getListOfSongs()) {
-            songsMade.add(song);
+    public boolean newAlbumsMade(Album album) {
+        if (album.getListOfSongs().size() != 0) {
+            albumsMade.add(album);
+            for (Playable song :album.getListOfSongs()) {
+                songsMade.add(song);
+            }
+            return true;
         }
+
+        return false;
     }
 
     public String getName() {

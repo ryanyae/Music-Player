@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArtistTest {
 
@@ -38,26 +37,30 @@ public class ArtistTest {
         artistTest2 = new Artist("Dua Lipa");
 
 
-        songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav",
+        songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends Never Die.wav",
                 albumTest1);
-        albumTest1 = new Album(artistTest1, "Album Test 1", new ArrayList<>(Arrays.asList(songTest1)));
+        albumTest1 = new Album(artistTest1, "Riot Games Album Test 1",
+                new ArrayList<>(Arrays.asList(songTest1)));
         artistTest1.newAlbumsMade(albumTest1);
 
 
         songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
-        albumTest2 = new Album(artistTest2, "Album Test 2", new ArrayList<>(Arrays.asList(songTest2)));
+        albumTest2 = new Album(artistTest2, "Dua Lipa Album Test 1", new ArrayList<>(
+                Arrays.asList(songTest2)));
         artistTest2.newAlbumsMade(albumTest2);
 
 
-
-        songTest4 = new Song(artistTest1, "Awaken", "stub", albumTest4);
-        albumTest3 = new Album(artistTest1, "Album Test 3", new ArrayList<>(Arrays.asList(songTest4)));
+        songTest4 = new Song(artistTest1, "Awaken", "/resources/League Of Legends - Awaken",
+                albumTest4);
+        albumTest3 = new Album(artistTest1, "Riot Games Album Test 2",
+                new ArrayList<>(Arrays.asList(songTest4)));
         artistTest1.newAlbumsMade(albumTest3);
 
 
-        songTest3 = new Song(artistTest2, "Levitating", "stub", albumTest3);
+        songTest3 = new Song(artistTest2, "Levitating", "./resources/Dua Lipa - Levitating", albumTest3);
         songTest5 = new Song(artistTest2, "Future Nostalgia", "stub", albumTest3);
-        albumTest4 = new Album(artistTest2, "Album Test 4", new ArrayList<>(Arrays.asList(songTest3, songTest5)));
+        albumTest4 = new Album(artistTest2, "Dua Lipa Album Test 2",
+                new ArrayList<>(Arrays.asList(songTest3, songTest5)));
         artistTest2.newAlbumsMade(albumTest4);
 
     }
@@ -88,5 +91,22 @@ public class ArtistTest {
     void getAlbumsMadeTest() {
         assertEquals(artistTest1.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest1, albumTest3)));
         assertEquals(artistTest2.getAlbumsMade(),  new ArrayList<>(Arrays.asList(albumTest2, albumTest4)));
+    }
+
+    @Test
+    void newAlbumsMadeTest() {
+        assertFalse(artistTest2.newAlbumsMade(new Album(artistTest1, "Random Dua Lipa Album",
+                new ArrayList<>())));
+        assertEquals(artistTest2.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest2, albumTest4)));
+        assertEquals(artistTest2.getSongsMade(), new ArrayList<>(Arrays.asList(songTest2, songTest3, songTest5)));
+
+
+        Album randonAlbumTest = new Album(artistTest2, "Random Dua Lipa Album",
+                new ArrayList<>(Arrays.asList(songTest2)));
+        assertTrue(artistTest1.newAlbumsMade(randonAlbumTest));
+        assertEquals(artistTest1.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest1, albumTest3,
+                randonAlbumTest)));
+        assertEquals(artistTest1.getSongsMade(), new ArrayList<>(Arrays.asList(songTest1, songTest4, songTest2)));
+
     }
 }
