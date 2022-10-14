@@ -1,49 +1,17 @@
 package model.playable;
 
 import model.Artist;
-import model.listOfSongs.Album;
 
 import java.util.ArrayList;
 
 // Represents a Playable Podcast, different in the terms that this is not a song, but a podcast.
-public class Podcast implements Playable {
+public class Podcast extends Playable {
 
-    private String title;
-    private Artist artist;
-    private String filePath;
-
-    ArrayList<Artist> featuredArtists;
-
+    //EFFECTS: constructs a new podcast object with given title, maker, and filePath
     public Podcast(Artist maker, String title, String filePath) {
         this.artist = maker;
         this.title = title;
         this.filePath = filePath;
         featuredArtists = new ArrayList<>();
     }
-
-    @Override
-    public Artist getArtist() {
-        return artist;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getFilePath() {
-        return filePath;
-    }
-
-    @Override
-    public void addFeature(Artist artist) {
-
-    }
-
-    @Override
-    public ArrayList<Artist> getFeatures() {
-        return featuredArtists;
-    }
-
 }

@@ -1,20 +1,15 @@
 package model.playable;
 
 import model.Artist;
-import model.listOfSongs.Album;
+import model.listofsongs.Album;
 
 import java.util.ArrayList;
 
 // Represents a song made by an artist
-public class Song implements Playable {
-    private Artist artist;
-    private String title;
-    private String filePath;
-
-    ArrayList<Artist> featuredArtists;
-
+public class Song extends Playable {
     private Album album;
 
+    //EFFECTS: constructs a new song object with given title, maker, filePath and which album the song belongs to.
     public Song(Artist maker, String title, String filePath, Album album) {
         this.artist = maker;
         this.title = title;
@@ -23,32 +18,8 @@ public class Song implements Playable {
         featuredArtists = new ArrayList<>();
     }
 
-    @Override
-    public Artist getArtist() {
-        return artist;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getFilePath() {
-        return filePath;
-    }
-
+    // EFFECTS: returns album that this song belongs to
     public Album getAlbum() {
         return album;
-    }
-
-    @Override
-    public void addFeature(Artist artist) {
-        featuredArtists.add(artist);
-    }
-
-    @Override
-    public ArrayList<Artist> getFeatures() {
-        return featuredArtists;
     }
 }

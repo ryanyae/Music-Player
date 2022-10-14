@@ -4,15 +4,29 @@ import model.Artist;
 
 import java.util.ArrayList;
 
-public interface Playable {
+public abstract class Playable {
+    protected String title;
+    protected Artist artist;
+    protected String filePath;
+    protected ArrayList<Artist> featuredArtists;
 
-    Artist getArtist();
+    public Artist getArtist() {
+        return artist;
+    }
 
-    String getTitle();
+    public String getTitle() {
+        return title;
+    }
 
-    String getFilePath();
+    public String getFilePath() {
+        return filePath;
+    }
 
-    void addFeature(Artist artist);
+    public void addFeature(Artist artist) {
+        featuredArtists.add(artist);
+    }
 
-    ArrayList<Artist> getFeatures();
+    public ArrayList<Artist> getFeatures() {
+        return featuredArtists;
+    }
 }

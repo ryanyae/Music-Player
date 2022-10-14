@@ -17,4 +17,4 @@ able to expand my grasp on software engineering and make something other than a 
 * As a user I want to be able to add songs to my playlist.
 * As a user I want to be able to make new playlists.
 * As a user I want to be able to pause my music whenever I want.
-* As a user I want to be able to skip songs.
+* As a user I want to be able to delete some playlists.

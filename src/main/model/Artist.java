@@ -1,6 +1,6 @@
 package model;
 
-import model.listOfSongs.Album;
+import model.listofsongs.Album;
 import model.playable.Playable;
 import model.playable.Song;
 
