@@ -2,17 +2,17 @@ package ui;
 
 import model.Artist;
 import model.ListOfPlaylists;
+import model.songstate.SongState;
 import model.listofsongs.Album;
 import model.listofsongs.Playlist;
-import model.playable.Playable;
 import model.playable.Song;
+import model.songstate.State;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.*;
+import javax.sound.sampled.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MusicApp {
@@ -32,7 +32,9 @@ public class MusicApp {
 
     Scanner input;
 
-    ListOfPlaylists currentPlayLists = new ListOfPlaylists();
+    ListOfPlaylists currentPlayLists;
+
+    ArrayList<Song> allSongs;
 
 
     public MusicApp() {
@@ -44,9 +46,9 @@ public class MusicApp {
         boolean keepAlive = true;
         String userInput = null;
         input = new Scanner(System.in);
+        currentPlayLists = new ListOfPlaylists();
 
         System.out.println("Welcome, select a song to listen to from our very limited list of available songs!");
-
 
         while (keepAlive) {
             initialMenu();
@@ -56,7 +58,7 @@ public class MusicApp {
             if (userInput.equals("q")) {
                 keepAlive = false;
             } else {
-                processInitialMenuInput(userInput);
+                processMenuInput(userInput);
             }
         }
 
@@ -65,20 +67,19 @@ public class MusicApp {
 
     // REQUIRES: song to exist in the "resources" folder
     // EFFECTS: plays given .wav audio file, you are able to pause and resume the song
-    private void playSong(Song song) {
+    private void playSong(Song song) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         File musicFile = new File(song.getFilePath());
 
+        System.out.println("Now playing " + song.getTitle() + " by " + song.getArtist().getName());
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicFile);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
 
-            System.out.println("Now playing " + song.getTitle() + " by " + song.getArtist());
 
-            JOptionPane.showMessageDialog(null, "Press Ok to stop playing");
-
+            songMenu(clip);
         } catch (Exception error) {
             System.out.println(error);
         }
@@ -87,7 +88,7 @@ public class MusicApp {
     // EFFECTS: initializes all the songs and albums that our application has
     private void initializeWorld() {
         legendsNeverDieSong = new Song(riotGames,
-                "Legends Never Die", "./resources/League Of Legends - Legends Never Die.wav",
+                "Legends Never Die", "./resources/Legends-Never-Die.wav",
                 legendsAlbum);
         awakenLeagueSong = new Song(riotGames,
                 "Awaken", "./resources/League Of Legends - Awaken.wav", legendsAlbum);
@@ -95,7 +96,6 @@ public class MusicApp {
         legendsAlbum.addToListOfSongs(awakenLeagueSong);
         legendsAlbum.addToListOfSongs(legendsNeverDieSong);
         riotGames.newAlbumsMade(legendsAlbum);
-
 
         duaLipaOneKiss = new Song(duaLipa,
                 "One Kiss", "./resources/Dua Lipa - One Kiss.wav", duaLipaAlbum);
@@ -109,6 +109,9 @@ public class MusicApp {
         duaLipaAlbum.addToListOfSongs(duaLipaLevitating);
         duaLipaAlbum.addToListOfSongs(duaLipaFutureNostalgia);
         duaLipa.newAlbumsMade(duaLipaAlbum);
+
+        allSongs = new ArrayList<>(Arrays.asList(legendsNeverDieSong, awakenLeagueSong,
+                duaLipaOneKiss, duaLipaLevitating, duaLipaFutureNostalgia));
     }
 
 
@@ -121,16 +124,16 @@ public class MusicApp {
     }
 
     // EFFECTS: this will process whatever the user inputs for the main menu
-    private void processInitialMenuInput(String userInput) {
+    private void processMenuInput(String userInput) {
         switch (userInput) {
-            case "p":
-                playListMenu();
-                break;
-            case "b":
-                // stub
-                break;
-            default:
-                System.out.println("Invalid input try again");
+            case "p" -> playListMenu();
+            case "b" -> printAllSongs();
+            case "v" -> printPlaylists();
+            case "c" -> createPlaylistMenu();
+            default -> System.out.println("""
+
+                    ---------------------------------------------------------Invalid input try again
+                    ---------------------------------------------------------""".indent(1));
         }
     }
 
@@ -144,52 +147,106 @@ public class MusicApp {
         String playListMenuInput = input.next();
         playListMenuInput = playListMenuInput.toLowerCase();
 
-        processPlayListMenu(playListMenuInput);
+        processMenuInput(playListMenuInput);
     }
 
-    // EFFECTS: will process whatever the user input for the playlist menu
-    private void processPlayListMenu(String input) {
-
-        switch (input) {
-            case "v":
-                printPlaylists();
-                break;
-            case "c":
-                createPlaylistMenu();
-                break;
-            default:
-                System.out.println("Invalid input try again");
-        }
-    }
 
     // Prints out all the individual playlists that the user has
     private void printPlaylists() {
         if (currentPlayLists.getAllPlaylists().size() == 0) {
             System.out.println("You have no playlists");
         } else {
-            for (Playlist playList: currentPlayLists.getAllPlaylists()) {
+            for (Playlist playList : currentPlayLists.getAllPlaylists()) {
                 System.out.println(playList.getPlaylistTitle());
             }
         }
-    }
-
-    private boolean printSongsInPlayList(ArrayList<Playable> playlist) {
-        if (playlist.size() == 0) {
-            for (Playable song : playlist) {
-                System.out.println(song.getTitle() + " by " + song.getArtist().getName());
-            }
-        }
-        return false;
     }
 
     private void createPlaylistMenu() {
         System.out.println("Enter desired playlist name:");
         String createPlaylistInput = input.next();
 
-        Playlist newPlaylist = new Playlist(createPlaylistInput);
+        if (currentPlayLists.inAllPlaylist(createPlaylistInput)) {
+            System.out.println("""
 
-        if (!currentPlayLists.createNewPlaylist(newPlaylist)) {
-            System.out.println("Playlist already exists, try again :(");
+                    ------------------------------------------------------------
+                    ERROR: Playlist with this title already exists, try again :(
+                    ------------------------------------------------------------""".indent(1));
+        } else {
+            currentPlayLists.createNewPlaylist(new Playlist(createPlaylistInput));
+            System.out.println("""
+
+                    ------------------------------------------------------------
+                    Playlist successfully added!
+                    ------------------------------------------------------------""".indent(1));
         }
+    }
+
+    private void printAllSongs() {
+
+        for (int x = 1; x <= allSongs.size(); x++) {
+            System.out.println("------------------------"
+                    + "\n" + "[" + x + "]" + allSongs.get((x - 1)).getTitle()
+                    + "\n by " + allSongs.get((x - 1)).getArtist().getName());
+        }
+        System.out.println("------------------------");
+        allSongsMenu();
+    }
+
+    private void allSongsMenu() {
+
+        System.out.println("--- Select from the choices down above ---"
+                + "\n To play a song, input the song's indexed number");
+        String allSongsMenuInput = input.next();
+        int userSongMenuInputI = Integer.parseInt(allSongsMenuInput);
+
+        if (userSongMenuInputI <= allSongs.size()) {
+            try {
+                playSong(allSongs.get(userSongMenuInputI - 1));
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Something happened, try again");
+        }
+    }
+
+    private void songMenu(Clip clip) {
+        boolean keepAlive = true;
+        SongState songState = new SongState();
+        while (keepAlive) {
+            System.out.println("-----------------------");
+            System.out.println("pause - to pause the song");
+            System.out.println("resume - to resume the song");
+            System.out.println("exit - to exit the song");
+            System.out.println("-----------------------");
+            String userSongMenuInput = input.next();
+            userSongMenuInput = userSongMenuInput.toLowerCase();
+
+            if (userSongMenuInput.equals("exit")) {
+                keepAlive = false;
+                clip.stop();
+            }
+
+            processSongMenuCommand(userSongMenuInput, clip, songState);
+        }
+    }
+
+    private void processSongMenuCommand(String userSongMenuInput, Clip clip, SongState songState) {
+        try {
+            if (userSongMenuInput.equals("pause") && songState.getState().equals(State.PLAYING)) {
+                songState.setTimeStamp(clip.getMicrosecondPosition());
+                songState.setSongState(State.PAUSED);
+                clip.stop();
+            }
+            if (userSongMenuInput.equals("resume") && songState.getState().equals(State.PAUSED)) {
+                clip.setMicrosecondPosition(songState.getTime());
+                songState.setSongState(State.PLAYING);
+                clip.start();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

@@ -12,13 +12,17 @@ public class ListOfPlaylists {
         allPlaylists = new ArrayList<>();
     }
 
-
     // MODIFIES: this
     // EFFECTS: adds new Playlist to the allPlaylists
-    public boolean createNewPlaylist(Playlist playlist) {
-        if (!allPlaylists.contains(playlist)) {
-            allPlaylists.add(playlist);
-            return true;
+    public void createNewPlaylist(Playlist playlist) {
+        allPlaylists.add(playlist);
+    }
+
+    public boolean inAllPlaylist(String titleInput) {
+        for (Playlist dummyPlaylist:allPlaylists) {
+            if (dummyPlaylist.getPlaylistTitle().equals(titleInput)) {
+                return true;
+            }
         }
         return false;
     }

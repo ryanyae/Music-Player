@@ -8,8 +8,6 @@ import java.util.ArrayList;
 // Represents a playlist that a user made, with given title. The user can freely play songs from this playlist.
 // Is the accumulation of songs made by the user.
 public class Playlist extends ListOfSongs {
-    String title;
-
     ArrayList<Playable> songsInAlbum = new ArrayList<>();
 
     public Playlist(String title) {

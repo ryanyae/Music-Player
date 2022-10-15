@@ -16,7 +16,6 @@ public class Album extends ListOfSongs {
     public Album(Artist a, String albumName) {
         super(albumName);
         this.artist = a;
-        this.songsInAlbum = songsInAlbum;
     }
 
     public Artist getArtist() {
