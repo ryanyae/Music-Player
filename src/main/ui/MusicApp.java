@@ -78,10 +78,9 @@ public class MusicApp {
             clip.open(audioInputStream);
             clip.start();
 
-
             songMenu(clip);
         } catch (Exception error) {
-            System.out.println(error);
+            System.out.println("Could not play this song, try again");
         }
     }
 
@@ -120,14 +119,14 @@ public class MusicApp {
         System.out.println("--- Select from the choices down below---");
         System.out.println(" - p -> Go to your playlists");
         System.out.println(" - b -> browse from our collection of songs");
-        System.out.println(" - q -> exit the application");
+        System.out.println(" - q -> quit the application");
     }
 
     // EFFECTS: this will process whatever the user inputs for the main menu
     private void processMenuInput(String userInput) {
         switch (userInput) {
             case "p" -> playListMenu();
-            case "b" -> printAllSongs();
+            case "b" -> allSongsMenu();
             case "v" -> printPlaylists();
             case "c" -> createPlaylistMenu();
             default -> System.out.println("""
@@ -139,15 +138,23 @@ public class MusicApp {
 
     // EFFECTS: this is the menu that is displayed for when the user is in the playlist page
     private void playListMenu() {
+        boolean keepAlive = true;
 
-        System.out.println("--- Select from the choices down below---");
-        System.out.println(" - v -> to view all your playlists");
-        System.out.println(" - c -> to create a new playlist");
+        while (keepAlive) {
+            System.out.println("--- Select from the choices down below---");
+            System.out.println(" - v -> to view all your playlists");
+            System.out.println(" - c -> to create a new playlist");
+            System.out.println(" - b -> go back");
 
-        String playListMenuInput = input.next();
-        playListMenuInput = playListMenuInput.toLowerCase();
+            String playListMenuInput = input.next();
+            playListMenuInput = playListMenuInput.toLowerCase();
 
-        processMenuInput(playListMenuInput);
+            if (playListMenuInput.equals("b")) {
+                keepAlive = false;
+            } else {
+                processMenuInput(playListMenuInput);
+            }
+        }
     }
 
 
@@ -190,24 +197,40 @@ public class MusicApp {
                     + "\n by " + allSongs.get((x - 1)).getArtist().getName());
         }
         System.out.println("------------------------");
-        allSongsMenu();
     }
 
     private void allSongsMenu() {
+        boolean keepAlive = true;
 
-        System.out.println("--- Select from the choices down above ---"
-                + "\n To play a song, input the song's indexed number");
-        String allSongsMenuInput = input.next();
-        int userSongMenuInputI = Integer.parseInt(allSongsMenuInput);
 
-        if (userSongMenuInputI <= allSongs.size()) {
+
+        while (keepAlive) {
+            printAllSongs();
+            System.out.println((allSongs.size() + 1) + " -> go back");
+            System.out.println("--- Select from the choices down above ---"
+                    + "\n To play a song, input the song's indexed number");
+            String allSongsMenuInput = input.next();
+            String exitCommand = Integer.toString(allSongs.size() + 1);
+
             try {
-                playSong(allSongs.get(userSongMenuInputI - 1));
-            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-                throw new RuntimeException(e);
+                if (allSongsMenuInput.equals(exitCommand)) {
+                    keepAlive = false;
+                    break;
+                }
+                int userSongMenuInputI = Integer.parseInt(allSongsMenuInput);
+                if (userSongMenuInputI <= allSongs.size()) {
+                    try {
+                        playSong(allSongs.get(userSongMenuInputI - 1));
+                        //https://stackoverflow.com/questions/3495926/can-i-catch-multiple-java-exceptions-in-the-same-catch-clause
+                    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+                        System.out.println("Something went wrong :(");
+                    }
+                } else {
+                    System.out.println("try again");
+                }
+            } catch (Exception error) {
+                System.out.println("Something went wrong, try again");
             }
-        } else {
-            System.out.println("Something happened, try again");
         }
     }
 
@@ -245,6 +268,7 @@ public class MusicApp {
                 clip.start();
             }
         } catch (Exception e) {
+            // https://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html
             throw new RuntimeException(e);
         }
 

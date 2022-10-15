@@ -1,3 +1,5 @@
+package listofsongstest;
+
 import model.Artist;
 import model.listofsongs.Album;
 import model.playable.Song;
@@ -9,7 +11,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AlbumTest {
+public class ListOfSongsTest {
 
     private Artist artistTest1;
     private Artist artistTest2;

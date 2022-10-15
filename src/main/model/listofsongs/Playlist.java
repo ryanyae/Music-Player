@@ -8,21 +8,22 @@ import java.util.ArrayList;
 // Represents a playlist that a user made, with given title. The user can freely play songs from this playlist.
 // Is the accumulation of songs made by the user.
 public class Playlist extends ListOfSongs {
-    ArrayList<Playable> songsInAlbum = new ArrayList<>();
 
+
+    // EFFECTS: creates a new Playlist object which is an extension of the ListOfSongs abstact class
     public Playlist(String title) {
         super(title);
     }
 
+    // REQUIRES; 0 =< index <= playlist.size()
     // MODIFIES: this
-    // EFFECTS: will delete given song from the songsInAlbum
-    public void deleteSongFromList(Song song) {
-        songsInAlbum.remove(song);
+    // EFFECTS: will check if
+    public void deleteSongFromList(int index) {
+        songsInAlbum.remove(index);
     }
 
     // MODIFIES: this
-    // EFFECTS: add song to playlist
-    //         - if a duplicate exists in the songsInAlbum than return false, otherwise return true
+    // EFFECTS: returns true if the given song is already in the playlist, otherwise false.
     public Boolean isSongInAlbum(Song song) {
         return songsInAlbum.contains(song);
     }

@@ -11,11 +11,8 @@ public class Song extends Playable {
 
     //EFFECTS: constructs a new song object with given title, maker, filePath and which album the song belongs to.
     public Song(Artist maker, String title, String filePath, Album album) {
-        this.artist = maker;
-        this.title = title;
-        this.filePath = filePath;
+        super(title, maker, filePath);
         this.album = album;
-        featuredArtists = new ArrayList<>();
     }
 
     // EFFECTS: returns album that this song belongs to

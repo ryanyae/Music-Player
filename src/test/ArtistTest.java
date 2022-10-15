@@ -31,19 +31,16 @@ public class ArtistTest {
         artistTest1 = new Artist("Riot Games");
         artistTest2 = new Artist("Dua Lipa");
 
-
         songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends Never Die.wav",
                 albumTest1);
         albumTest1 = new Album(artistTest1, "Riot Games Album Test 1");
         albumTest1.addToListOfSongs(songTest1);
         artistTest1.newAlbumsMade(albumTest1);
 
-
         songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
         albumTest2 = new Album(artistTest2, "Dua Lipa Album Test 1");
         albumTest2.addToListOfSongs(songTest2);
         artistTest2.newAlbumsMade(albumTest2);
-
 
         songTest4 = new Song(artistTest1, "Awaken", "/resources/League Of Legends - Awaken",
                 albumTest4);
@@ -51,9 +48,9 @@ public class ArtistTest {
         albumTest3.addToListOfSongs(songTest4);
         artistTest1.newAlbumsMade(albumTest3);
 
-
         songTest3 = new Song(artistTest2, "Levitating", "./resources/Dua Lipa - Levitating", albumTest3);
-        songTest5 = new Song(artistTest2, "Future Nostalgia", "stub", albumTest3);
+        songTest5 = new Song(artistTest2, "Future Nostalgia", "resources/Dua Lipa - Future Nostalgia.wav",
+                albumTest3);
         albumTest4 = new Album(artistTest2, "Dua Lipa Album Test 2");
         albumTest4.addToListOfSongs(songTest3);
         albumTest4.addToListOfSongs(songTest5);

@@ -9,12 +9,15 @@ import java.util.ArrayList;
 // Represents that can make podcasts and songs, they are also able to make albums that are an accumulation of songs
 // that the artist have made.
 public class Artist {
-    ArrayList<Playable> songsMade;
+    ArrayList<Playable> songsMade;          // list of all the songs that the artist may have made
 
-    ArrayList<Album> albumsMade;
+    ArrayList<Album> albumsMade;            // list of all the albums that the artist may have made
 
-    String name;
+    String name;                            // stage name of the artist
 
+
+    // EFFECTS: creates a new artist with the given name, and two new empty ArrayLists that represents
+    //          all the songs and albums that the artist may have made
     public Artist(String name) {
         this.name = name;
         this.songsMade = new ArrayList<>();
@@ -33,6 +36,10 @@ public class Artist {
         songsMade.add(song);
     }
 
+    // REQUIRES: album.getListOfSongs().size() > 0
+    // MODIFIES: this
+    // EFFECTS: creates a new album for the given artist, and will add all the songs on the album into
+    //          the artist's "songsMade" ArrayList, regardless of duplication.
     public boolean newAlbumsMade(Album album) {
         if (album.getListOfSongs().size() != 0) {
             albumsMade.add(album);

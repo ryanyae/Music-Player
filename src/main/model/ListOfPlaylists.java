@@ -4,10 +4,13 @@ import model.listofsongs.Playlist;
 
 import java.util.ArrayList;
 
+// represents a list of playlists that the user may have, this user could have 0 playlist of 100.
 public class ListOfPlaylists {
 
-    ArrayList<Playlist> allPlaylists;
+    ArrayList<Playlist> allPlaylists;       // all the playlists of the user
 
+
+    // EFFECTS: creates a new ListOfPlaylists with an initially 0 playlists for the user.
     public ListOfPlaylists() {
         allPlaylists = new ArrayList<>();
     }
@@ -18,6 +21,10 @@ public class ListOfPlaylists {
         allPlaylists.add(playlist);
     }
 
+    // MODIFIES: this
+    // EFFECTS: check if there is a duplication of playlist titles in allPlaylists
+    //              - if there is NO duplication, then add the playlist to the master list and return  true
+    //          else return false
     public boolean inAllPlaylist(String titleInput) {
         for (Playlist dummyPlaylist:allPlaylists) {
             if (dummyPlaylist.getPlaylistTitle().equals(titleInput)) {
