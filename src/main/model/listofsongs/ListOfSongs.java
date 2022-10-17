@@ -1,7 +1,6 @@
 package model.listofsongs;
 
 import model.playable.Playable;
-import model.playable.Song;
 
 import java.util.ArrayList;
 

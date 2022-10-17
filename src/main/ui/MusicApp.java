@@ -136,48 +136,51 @@ public class MusicApp {
     //              printPlaylistsMenu() for "v", and createPlaylistMenu() for "c".
     private void processMenuInput(String userInput) {
         switch (userInput) {
-            case "p" -> playlistMenu();
-            case "b" -> allSongsMenu();
-            case "v" -> printPlaylistsMenu();
-            case "c" -> createPlaylistMenu();
-            case "d" -> deletePlaylistMenu();
-            default -> System.out.println("""
-                    -------------------------
-                     ERROR: Invalid input
-                    -------------------------""");
+            case "p":
+                playlistMenu();
+            case "b":
+                allSongsMenu();
+            case "v":
+                printPlaylistsMenu();
+            case "c":
+                createPlaylistMenu();
+            case "d":
+                deletePlaylistMenu();
+            default:
+                System.out.println("-------------------------"
+                        + "\n ERROR: Invalid input"
+                        + "\n -------------------------");
         }
     }
 
-    @SuppressWarnings("28")
+    @SuppressWarnings({"28", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void deletePlaylistMenu() {
-       boolean keepAlive = true;
-       while(keepAlive) {
-           if (currentPlayLists.getLength() == 0) {
-               System.out.print("""
-                            -------------------------
-                             No playlists to delete
-                            -------------------------""");
-               keepAlive = false;
-           } else {
-               for (int x = 1; x <= currentPlayLists.getLength(); x++) {
-                   System.out.println(x + " -> " + currentPlayLists.getPlaylistByIndex(x-1).getPlaylistTitle());
-               }
-               System.out.println((currentPlayLists.getLength() + 1) + " -> go back");
-               System.out.println("Delete playlist by inputting it's given index");
-               String userInput = input.next();
-               try {
-                   if (Integer.parseInt(userInput) != (currentPlayLists.getLength() + 1)) {
-                       currentPlayLists.deletePlaylist(Integer.parseInt(userInput) - 1);
-                   }
-                   keepAlive = false;
-               } catch (Exception error) {
-                   System.out.println("""
-                            -------------------------
-                             Invalid input, try again.
-                            -------------------------""");
-               }
-           }
-       }
+        boolean keepAlive = true;
+        while (keepAlive) {
+            if (currentPlayLists.getLength() == 0) {
+                System.out.print("-------------------------"
+                        + "\n No playlists to delete"
+                        + "\n -------------------------");
+                keepAlive = false;
+            } else {
+                for (int x = 1; x <= currentPlayLists.getLength(); x++) {
+                    System.out.println(x + " -> " + currentPlayLists.getPlaylistByIndex(x - 1).getPlaylistTitle());
+                }
+                System.out.println((currentPlayLists.getLength() + 1) + " -> go back");
+                System.out.println("Delete playlist by inputting it's given index");
+                String userInput = input.next();
+                try {
+                    if (Integer.parseInt(userInput) != (currentPlayLists.getLength() + 1)) {
+                        currentPlayLists.deletePlaylist(Integer.parseInt(userInput) - 1);
+                    }
+                    keepAlive = false;
+                } catch (Exception error) {
+                    System.out.println("-------------------------"
+                            + "\n Invalid input, try again"
+                            + "\n -------------------------");
+                }
+            }
+        }
     }
 
     // EFFECTS: this is the menu that is displayed for when the user is in the playlist page
@@ -202,7 +205,7 @@ public class MusicApp {
         }
     }
 
-    @SuppressWarnings("38")
+    @SuppressWarnings({"38", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     // EFFECTS: Prints out all the individual playlists that the user has made during the session
     //              - if no playlists exist than the system will output a message, telling the user that there are no
     //                  songs to print out
@@ -213,10 +216,9 @@ public class MusicApp {
         while (keepAlive) {
             try {
                 if (currentPlayLists.getAllPlaylists().size() == 0) {
-                    System.out.println("""
-                            -------------------------
-                             No playlists to display
-                            -------------------------""");
+                    System.out.println("-------------------------"
+                            + "\n No playlists to display"
+                            + "\n -------------------------");
                     System.out.println(" c -> create a new playlist");
                     System.out.println(" b -> go back");
                     String userInput = input.next();
@@ -257,10 +259,9 @@ public class MusicApp {
     //            by printPlaylistSongs(...)
     private void playlistsMenu(int i) {
         if (currentPlayLists.getPlaylistByIndex(i - 1).getPlaylistLength() == 0) {
-            System.out.println("""
-                    -------------------------
-                     No songs to display
-                    -------------------------""");
+            System.out.println("-------------------------"
+                    + "\n No songs to display"
+                    + "\n -------------------------");
         } else {
             printPlaylistSongs(currentPlayLists.getPlaylistByIndex(i - 1));
         }
@@ -304,18 +305,14 @@ public class MusicApp {
         System.out.println("Enter desired playlist name:");
         String createPlaylistInput = input.next();
         if (currentPlayLists.inAllPlaylist(createPlaylistInput)) {
-            System.out.println("""
-
-                    ------------------------------------------------------------
-                    ERROR: Playlist with this title already exists, try again :(
-                    ------------------------------------------------------------""".indent(1));
+            System.out.println("-------------------------------------------------------------------------------------"
+                    + "\n ERROR: Playlist with this title already exists, try again :("
+                    + "------------------------------------------------------------");
         } else {
             currentPlayLists.createNewPlaylist(new Playlist(createPlaylistInput));
-            System.out.println("""
-
-                    ------------------------------------------------------------
-                    Playlist successfully added!
-                    ------------------------------------------------------------""".indent(1));
+            System.out.println("-------------------------------------------------------------------------------------"
+                    + "\n Playlist successfully added!"
+                    + "------------------------------------------------------------");
         }
     }
 
@@ -349,7 +346,7 @@ public class MusicApp {
                 int userSongMenuInputI = Integer.parseInt(allSongsMenuInput);
                 if (userSongMenuInputI == (allSongs.size() + 1)) {
                     keepAlive = false;
-                }else if (userSongMenuInputI <= allSongs.size()) {
+                } else if (userSongMenuInputI <= allSongs.size()) {
                     playSong(allSongs.get(userSongMenuInputI - 1));
                 } else {
                     System.out.println("Try again");
@@ -400,7 +397,7 @@ public class MusicApp {
     //              - gets the new playlist by .getPlaylistByIndex(currentPlayLists.getLength() - 1) because
     //                  that's the index in which the new playlist exists at
     //          - if anything fails the catch block will fire an error message
-    @SuppressWarnings("36")
+    @SuppressWarnings({"36", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addingSongToPlaylist(Playable playable) {
         boolean keepAlive = true;
         while (keepAlive) {
@@ -416,17 +413,15 @@ public class MusicApp {
                     createPlaylistMenu();
                     this.currentPlayLists.getPlaylistByIndex(
                             currentPlayLists.getLength() - 1).addToListOfSongs(playable);
-                    System.out.println("""
-                            -------------------------
-                             Song added successfully!
-                            -------------------------""");
+                    System.out.println(" -------------------------"
+                            + "\n Song added successfully!"
+                            + "\n -------------------------");
                     keepAlive = false;
                 } else if (1 <= intUserInput && intUserInput <= currentPlayLists.getLength()) {
                     this.currentPlayLists.getPlaylistByIndex(intUserInput - 1).addToListOfSongs(playable);
-                    System.out.println("""
-                            -------------------------
-                             Song added successfully!
-                            -------------------------""");
+                    System.out.println(" -------------------------"
+                            + "\n Song added successfully!"
+                            + "\n -------------------------");
                     keepAlive = false;
                 }
             } catch (Exception error) {
@@ -446,7 +441,7 @@ public class MusicApp {
                 System.out.println("No playlists to display");
             } else {
                 for (int x = 1; x <= currentPlayLists.getLength(); x++) {
-                    System.out.println(x + " -> "+ currentPlayLists.getPlaylistByIndex(x - 1).getPlaylistTitle());
+                    System.out.println(x + " -> " + currentPlayLists.getPlaylistByIndex(x - 1).getPlaylistTitle());
                 }
             }
             keepAlive = false;
@@ -457,7 +452,7 @@ public class MusicApp {
     // EFFECTS: updates songState, and pauses or resumes the song for the user
     //              - you can only pause the song if songState.getState().equals(State.PLAYING)
     //              - you can only resume the song if songState.getState().equals(State.PAUSED)
-    @SuppressWarnings("29")
+    @SuppressWarnings({"29", "checkstyle:SuppressWarnings"})
     private void processSongMenuCommand(String userSongMenuInput, Clip clip, SongState songState) {
         try {
             if (userSongMenuInput.equals("pause") && songState.getState().equals(State.PLAYING)) {

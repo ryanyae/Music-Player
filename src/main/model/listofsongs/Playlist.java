@@ -1,9 +1,7 @@
 package model.listofsongs;
 
-import model.playable.Playable;
 import model.playable.Song;
 
-import java.util.ArrayList;
 
 // Represents a playlist that a user made, with given title. The user can freely play songs from this playlist.
 // Is the accumulation of songs made by the user.
