@@ -48,7 +48,6 @@ public class Artist {
             }
             return true;
         }
-
         return false;
     }
 

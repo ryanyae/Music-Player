@@ -9,13 +9,14 @@ import java.util.ArrayList;
 public class Song extends Playable {
     private Album album;
 
-    //EFFECTS: constructs a new song object with given title, maker, filePath and which album the song belongs to.
+    // EFFECTS: instantiates a new Playable object with a given title, artist, filePath and an
+    //          empty ArrayList of features
+    //              - filePath is the location of the file within this object.
     public Song(Artist maker, String title, String filePath, Album album) {
         super(title, maker, filePath);
         this.album = album;
     }
 
-    // EFFECTS: returns album that this song belongs to
     public Album getAlbum() {
         return album;
     }

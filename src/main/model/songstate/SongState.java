@@ -1,7 +1,7 @@
 package model.songstate;
 
 // Represents the state at which a song is at, state refers to if the song is currently PLAYING at the moment
-//     or if its PAUSED. PAUSED and PLAYING are apart of an enum because a song can only be in one of the two states
+//     or if its PAUSED. PAUSED and PLAYING are part of an enum because a song can only be in one of the two states
 //     Time is the representation of when the song may be PAUSED at, if the song is PAUSED.
 public class SongState {
     private long time;          // time in which the song maybe PAUSED at, if at all PAUSED

@@ -42,12 +42,13 @@ public class MusicApp {
         runMusicApp();
     }
 
-    // EFFECTS: runs the first menu, and is the first and last menu that someone will see
+    // MODIFIES: this
+    // EFFECTS: runs the first menu, and is the first and last menu that the user will see
     private void runMusicApp() {
         initializeWorld();
         boolean keepAlive = true;
         String userInput;
-        input = new Scanner(System.in);
+        this.input = new Scanner(System.in);
         currentPlayLists = new ListOfPlaylists();
 
         System.out.println("Welcome, select a song to listen to from our very limited list of available songs!");
@@ -131,7 +132,7 @@ public class MusicApp {
     //          - if the input is not recognized by this method than the switch case is defaulted to shooting a message.
     //          - this method will actually process the userInputs of both the runMusicApp() and playlistMenu()
     //          - will not account for when the user inputs "q" in runMusicApp() because, in runMusicApp(), that is the
-    //              firs thing that that method will check for.
+    //              first thing that that method will check for.
     //          - when given an input it will direct the user to either playlistMenu() for "p", allSongsMenu() for "b",
     //              printPlaylistsMenu() for "v", and createPlaylistMenu() for "c".
     private void processMenuInput(String userInput) {
@@ -153,6 +154,14 @@ public class MusicApp {
         }
     }
 
+    // EFFECTS: props a menu, and given a user's input will delete a playlist indexed by the user.
+    //              - user's input is a number
+    //              - if no playlists exist in currentPlaylists than the method will print out a message
+    //              - if there are playlist than the user has the option deleting any of those playlists
+    //              - the method will print out the playlists indexed from 1 but the system will delete
+    //                  based from being indexed from 0
+    //              - if the user's input falls outside the domain of currentPlayLists.getLength() + 1, than
+    //                  a error message will pop out for them.
     @SuppressWarnings("methodlength")
     private void deletePlaylistMenu() {
         boolean keepAlive = true;
@@ -298,7 +307,7 @@ public class MusicApp {
         playSong(playlist.getSongByIndex(Integer.parseInt(userInput) - 1));
     }
 
-    // MODIFIES: this (currentPlaylists)
+    // MODIFIES: this
     // EFFECTS: menu for creating a new playlist with a given name by the user
     //          - if the playlist already exists in the user's master list of playlist than an
     //            error will be handled by a message asking them to try again
@@ -308,12 +317,12 @@ public class MusicApp {
         if (currentPlayLists.inAllPlaylist(createPlaylistInput)) {
             System.out.println("-------------------------------------------------------------------------------------"
                     + "\n ERROR: Playlist with this title already exists, try again :("
-                    + "------------------------------------------------------------");
+                    + "\n ------------------------------------------------------------");
         } else {
-            currentPlayLists.addNewPlaylist(new Playlist(createPlaylistInput));
+            this.currentPlayLists.addNewPlaylist(new Playlist(createPlaylistInput));
             System.out.println("-------------------------------------------------------------------------------------"
                     + "\n Playlist successfully added!"
-                    + "------------------------------------------------------------");
+                    + "\n ------------------------------------------------------------");
         }
     }
 
