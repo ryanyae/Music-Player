@@ -475,12 +475,12 @@ public class MusicApp {
                 songState.setSongState(State.PLAYING);
                 clip.start();
             }
-            if (userSongMenuInput.equals("resume") && !songState.getState().equals(State.PAUSED)) {
+            if (userSongMenuInput.equals("resume") && !songState.getState().equals(State.PLAYING)) {
                 // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
                 // is%20as,%2C%20server%2C%20backend%2C%20etc.
                 throw new Exception("Cannot resume an already playing song");
             }
-            if (userSongMenuInput.equals("pause") && !songState.getState().equals(State.PLAYING)) {
+            if (userSongMenuInput.equals("pause") && !songState.getState().equals(State.PAUSED)) {
                 // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
                 // is%20as,%2C%20server%2C%20backend%2C%20etc.
                 throw new Exception("Cannot pause an already paused song");
