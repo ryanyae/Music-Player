@@ -31,8 +31,12 @@ public abstract class ListOfSongs {
         return songsInAlbum;
     }
 
-    public void addToListOfSongs(Song song) {
-        songsInAlbum.add(song);
+    public void addToListOfSongs(Playable playable) {
+        songsInAlbum.add(playable);
+    }
+
+    public Playable getSongByIndex(int i) {
+        return songsInAlbum.get(i);
     }
 
 }

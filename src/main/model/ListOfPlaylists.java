@@ -34,6 +34,21 @@ public class ListOfPlaylists {
         return false;
     }
 
+    // REQUIRES: 0 <= i < allPlaylist.size()
+    // MODIFIES: this
+    // EFFECTS: removes given index from currentPlaylists
+    public void deletePlaylist(int i) {
+        allPlaylists.remove(i);
+    }
+
+    public int getLength() {
+        return allPlaylists.size();
+    }
+
+    public Playlist getPlaylistByIndex(int i) {
+        return allPlaylists.get(i);
+    }
+
     public ArrayList<Playlist> getAllPlaylists() {
         return allPlaylists;
     }
