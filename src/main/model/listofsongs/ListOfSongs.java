@@ -30,6 +30,8 @@ public abstract class ListOfSongs {
         return songsInAlbum;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds given song songsInAlbum
     public void addToListOfSongs(Playable playable) {
         songsInAlbum.add(playable);
     }

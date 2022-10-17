@@ -1,5 +1,3 @@
-package listofsongstest;
-
 import model.Artist;
 import model.listofsongs.Album;
 import model.listofsongs.Playlist;

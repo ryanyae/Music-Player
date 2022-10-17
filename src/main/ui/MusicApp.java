@@ -153,7 +153,7 @@ public class MusicApp {
         }
     }
 
-    @SuppressWarnings({"28", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    @SuppressWarnings("methodlength")
     private void deletePlaylistMenu() {
         boolean keepAlive = true;
         while (keepAlive) {
@@ -205,12 +205,13 @@ public class MusicApp {
         }
     }
 
-    @SuppressWarnings({"38", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+
     // EFFECTS: Prints out all the individual playlists that the user has made during the session
     //              - if no playlists exist than the system will output a message, telling the user that there are no
     //                  songs to print out
     //              - the playlists are printed in a way so that the user will need to input the number that the
     //                  playlist is indexed at inorder operate on that playlist
+    @SuppressWarnings("methodlength")
     private void printPlaylistsMenu() {
         boolean keepAlive = true;
         while (keepAlive) {
@@ -309,7 +310,7 @@ public class MusicApp {
                     + "\n ERROR: Playlist with this title already exists, try again :("
                     + "------------------------------------------------------------");
         } else {
-            currentPlayLists.createNewPlaylist(new Playlist(createPlaylistInput));
+            currentPlayLists.addNewPlaylist(new Playlist(createPlaylistInput));
             System.out.println("-------------------------------------------------------------------------------------"
                     + "\n Playlist successfully added!"
                     + "------------------------------------------------------------");
@@ -397,7 +398,7 @@ public class MusicApp {
     //              - gets the new playlist by .getPlaylistByIndex(currentPlayLists.getLength() - 1) because
     //                  that's the index in which the new playlist exists at
     //          - if anything fails the catch block will fire an error message
-    @SuppressWarnings({"36", "checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    @SuppressWarnings("methodlength")
     private void addingSongToPlaylist(Playable playable) {
         boolean keepAlive = true;
         while (keepAlive) {
@@ -452,7 +453,7 @@ public class MusicApp {
     // EFFECTS: updates songState, and pauses or resumes the song for the user
     //              - you can only pause the song if songState.getState().equals(State.PLAYING)
     //              - you can only resume the song if songState.getState().equals(State.PAUSED)
-    @SuppressWarnings({"29", "checkstyle:SuppressWarnings"})
+    @SuppressWarnings("methodlength")
     private void processSongMenuCommand(String userSongMenuInput, Clip clip, SongState songState) {
         try {
             if (userSongMenuInput.equals("pause") && songState.getState().equals(State.PLAYING)) {

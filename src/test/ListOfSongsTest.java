@@ -1,5 +1,3 @@
-package listofsongstest;
-
 import model.Artist;
 import model.listofsongs.Album;
 import model.playable.Song;
@@ -9,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListOfSongsTest {
 
@@ -75,8 +73,22 @@ public class ListOfSongsTest {
 
     @Test
     void addToListOfSongsTest() {
-        albumTest1.addToListOfSongs(songTest1);
-        assertEquals(albumTest1.getListOfSongs(), new ArrayList<>(Arrays.asList(songTest1, songTest1)));
+        albumTest1.addToListOfSongs(songTest2);
+        assertTrue(albumTest1.getListOfSongs().contains(songTest2));
         assertEquals(albumTest1.getPlaylistLength(), 2);
+
+        albumTest4.addToListOfSongs(songTest2);
+        assertTrue(albumTest4.getListOfSongs().contains(songTest2));
+        assertTrue(albumTest4.getListOfSongs().contains(songTest3));
+        assertTrue(albumTest4.getListOfSongs().contains(songTest5));
+        assertFalse(albumTest4.getListOfSongs().contains(songTest4));
+    }
+
+    @Test
+    void getSongByIndexTest() {
+        assertEquals(albumTest1.getSongByIndex(0), songTest1);
+        assertEquals(albumTest2.getSongByIndex(0), songTest2);
+        assertEquals(albumTest3.getSongByIndex(0), songTest4);
+        assertEquals(albumTest4.getSongByIndex(1), songTest5);
     }
 }

@@ -4,13 +4,15 @@ import model.playable.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class PlayableTest {
+public class SongTest {
 
     private Artist artistTest1;
 
     private Artist artistTest2;
+
+    private Artist artistTest3;
 
     private Song songTest1;
 
@@ -23,6 +25,7 @@ class PlayableTest {
 
     @BeforeEach
     void setUp() {
+
         artistTest1 = new Artist("Riot Games");
         songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav",
                 albumTest1);
@@ -36,21 +39,13 @@ class PlayableTest {
         albumTest2 = new Album(artistTest2, "Future Nostalgia");
         albumTest2.addToListOfSongs(songTest2);
         albumTest2.addToListOfSongs(songTest3);
+
+        artistTest3 = new Artist("DaBaby");
     }
 
     @Test
-    void constructorTest() {
-        assertEquals(songTest1.getArtist(), artistTest1);
-        assertEquals(songTest2.getArtist(), artistTest2);
-        assertEquals(songTest3.getArtist(), artistTest2);
-
-        assertEquals(songTest1.getTitle(), "Legends Never Die");
-        assertEquals(songTest2.getTitle(), "One Kiss");
-        assertEquals(songTest3.getTitle(), "Levitating");
-
-        assertEquals(songTest1.getFilePath(), "./resources/Legends-Never-Die.wav");
-        assertEquals(songTest2.getFilePath(), "./resources/Dua Lipa - One Kiss.wav");
-        assertEquals(songTest3.getFilePath(), "./resources/Dua Lipa - Levitating.wav");
+    void addFeatureTest() {
+        songTest3.addFeature(artistTest3);
+        assertTrue(songTest3.getFeatures().contains(artistTest3));
     }
 }
-
