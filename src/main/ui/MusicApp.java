@@ -48,7 +48,7 @@ public class MusicApp {
         initializeWorld();
         boolean keepAlive = true;
         String userInput;
-        this.input = new Scanner(System.in);
+        input = new Scanner(System.in);
         currentPlayLists = new ListOfPlaylists();
 
         System.out.println("Welcome, select a song to listen to from our very limited list of available songs!");
@@ -64,7 +64,6 @@ public class MusicApp {
                 processMenuInput(userInput);
             }
         }
-
         System.out.println("Thank you for using this application");
     }
 
@@ -139,14 +138,19 @@ public class MusicApp {
         switch (userInput) {
             case "p":
                 playlistMenu();
+                break;
             case "b":
                 allSongsMenu();
+                break;
             case "v":
                 printPlaylistsMenu();
+                break;
             case "c":
                 createPlaylistMenu();
+                break;
             case "d":
                 deletePlaylistMenu();
+                break;
             default:
                 System.out.println("-------------------------"
                         + "\n ERROR: Invalid input"
@@ -164,30 +168,25 @@ public class MusicApp {
     //                  a error message will pop out for them.
     @SuppressWarnings("methodlength")
     private void deletePlaylistMenu() {
-        boolean keepAlive = true;
-        while (keepAlive) {
-            if (currentPlayLists.getLength() == 0) {
-                System.out.print("-------------------------"
-                        + "\n No playlists to delete"
+        if (currentPlayLists.getLength() == 0) {
+            System.out.print("-------------------------"
+                    + "\n No playlists to delete"
+                    + "\n -------------------------");
+        } else {
+            for (int x = 1; x <= currentPlayLists.getLength(); x++) {
+                System.out.println(x + " -> " + currentPlayLists.getPlaylistByIndex(x - 1).getPlaylistTitle());
+            }
+            System.out.println((currentPlayLists.getLength() + 1) + " -> go back");
+            System.out.println("Delete playlist by inputting it's given index");
+            String userInput = input.next();
+            try {
+                if (Integer.parseInt(userInput) != (currentPlayLists.getLength() + 1)) {
+                    currentPlayLists.deletePlaylist(Integer.parseInt(userInput) - 1);
+                }
+            } catch (Exception error) {
+                System.out.println("-------------------------"
+                        + "\n hello"
                         + "\n -------------------------");
-                keepAlive = false;
-            } else {
-                for (int x = 1; x <= currentPlayLists.getLength(); x++) {
-                    System.out.println(x + " -> " + currentPlayLists.getPlaylistByIndex(x - 1).getPlaylistTitle());
-                }
-                System.out.println((currentPlayLists.getLength() + 1) + " -> go back");
-                System.out.println("Delete playlist by inputting it's given index");
-                String userInput = input.next();
-                try {
-                    if (Integer.parseInt(userInput) != (currentPlayLists.getLength() + 1)) {
-                        currentPlayLists.deletePlaylist(Integer.parseInt(userInput) - 1);
-                    }
-                    keepAlive = false;
-                } catch (Exception error) {
-                    System.out.println("-------------------------"
-                            + "\n Invalid input, try again"
-                            + "\n -------------------------");
-                }
             }
         }
     }
@@ -252,8 +251,9 @@ public class MusicApp {
                         keepAlive = false;
                     } else if (Integer.parseInt(userInput) == (currentPlayLists.getLength() + 2)) {
                         keepAlive = false;
-                    } else {
+                    } else if (Integer.parseInt(userInput) < (currentPlayLists.getLength() + 1)) {
                         playlistsMenu(Integer.parseInt(userInput));
+                        keepAlive = false;
                     }
                 }
             } catch (Exception error) {
@@ -465,6 +465,16 @@ public class MusicApp {
     @SuppressWarnings("methodlength")
     private void processSongMenuCommand(String userSongMenuInput, Clip clip, SongState songState) {
         try {
+            if (userSongMenuInput.equals("resume") && !songState.getState().equals(State.PAUSED)) {
+                // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
+                // is%20as,%2C%20server%2C%20backend%2C%20etc.
+                throw new Exception("Cannot resume an already playing song");
+            }
+            if (userSongMenuInput.equals("pause") && !songState.getState().equals(State.PLAYING)) {
+                // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
+                // is%20as,%2C%20server%2C%20backend%2C%20etc.
+                throw new Exception("Cannot pause an already paused song");
+            }
             if (userSongMenuInput.equals("pause") && songState.getState().equals(State.PLAYING)) {
                 songState.setTimeStamp(clip.getMicrosecondPosition());
                 songState.setSongState(State.PAUSED);
@@ -474,16 +484,6 @@ public class MusicApp {
                 clip.setMicrosecondPosition(songState.getTime());
                 songState.setSongState(State.PLAYING);
                 clip.start();
-            }
-            if (userSongMenuInput.equals("resume") && !songState.getState().equals(State.PLAYING)) {
-                // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
-                // is%20as,%2C%20server%2C%20backend%2C%20etc.
-                throw new Exception("Cannot resume an already playing song");
-            }
-            if (userSongMenuInput.equals("pause") && !songState.getState().equals(State.PAUSED)) {
-                // https://rollbar.com/guides/java/how-to-throw-exceptions-in-java/#:~:text=Throwing%20an%20exception%20
-                // is%20as,%2C%20server%2C%20backend%2C%20etc.
-                throw new Exception("Cannot pause an already paused song");
             }
         } catch (Exception e) {
             // https://www.geeksforgeeks.org/throwable-getmessage-method-in-java-with-examples/#:~:
