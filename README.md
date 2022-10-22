@@ -18,3 +18,5 @@ able to expand my grasp on software engineering and make something other than a 
 * As a user I want to be able to make new playlists.
 * As a user I want to be able to pause and resume my music whenever I want.
 * As a user I want to be able to delete some playlists.
+* As a user all the playlists that I make automatically save by itself
+* As a user I want to be given the option reload my previous playlists

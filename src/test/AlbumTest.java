@@ -18,11 +18,11 @@ public class AlbumTest {
     @BeforeEach
     void setUp() {
         duaLipaTest = new Artist("Dua Lipa");
-        songTest1 = new Song(duaLipaTest, "Future Nostalgia", "resources/Dua Lipa - Future Nostalgia.wav",
+        songTest1 = new Song(duaLipaTest, "Future Nostalgia", "./data/Dua Lipa - Future Nostalgia.wav",
                 albumTest1);
-        songTest2 = new Song(duaLipaTest, "Levitating", "./resources/Dua Lipa - Levitating",
+        songTest2 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating",
                 albumTest1);
-        songTest3 = new Song(duaLipaTest, "One Kiss", "./resources/Dua Lipa - One Kiss.wav",
+        songTest3 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav",
                 albumTest1);
         albumTest1 = new Album(duaLipaTest, "Dua Lipa Album Test");
 

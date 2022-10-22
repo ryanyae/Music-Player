@@ -32,18 +32,18 @@ public class ArtistTest {
         duaLipaTest = new Artist("Dua Lipa");
         daBabyTest = new Artist("DaBaby");
 
-        songTest1 = new Song(riotGamesTest, "Legends Never Die", "./resources/Legends Never Die.wav",
+        songTest1 = new Song(riotGamesTest, "Legends Never Die", "./data/Legends Never Die.wav",
                 albumTest1);
         albumTest1 = new Album(riotGamesTest, "Riot Games Album Test 1");
         albumTest1.addToListOfSongs(songTest1);
         riotGamesTest.newAlbumsMade(albumTest1);
 
-        songTest2 = new Song(duaLipaTest, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
+        songTest2 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav", albumTest2);
         albumTest2 = new Album(duaLipaTest, "Dua Lipa Album Test 1");
         albumTest2.addToListOfSongs(songTest2);
         duaLipaTest.newAlbumsMade(albumTest2);
 
-        songTest4 = new Song(riotGamesTest, "Awaken", "/resources/League Of Legends - Awaken",
+        songTest4 = new Song(riotGamesTest, "Awaken", "/data/League Of Legends - Awaken",
                 albumTest3);
         albumTest3 = new Album(riotGamesTest, "Riot Games Album Test 2");
         albumTest3.addToListOfSongs(songTest4);
@@ -51,9 +51,9 @@ public class ArtistTest {
 
 
         albumTest4 = new Album(duaLipaTest, "Dua Lipa Album Test 2");
-        songTest3 = new Song(duaLipaTest, "Levitating", "./resources/Dua Lipa - Levitating", albumTest4);
+        songTest3 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating", albumTest4);
         albumTest4.addToListOfSongs(songTest3);
-        songTest5 = new Song(duaLipaTest, "Future Nostalgia", "resources/Dua Lipa - Future Nostalgia.wav",
+        songTest5 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav",
                 albumTest4);
         albumTest4.addToListOfSongs(songTest5);
         duaLipaTest.newAlbumsMade(albumTest4);

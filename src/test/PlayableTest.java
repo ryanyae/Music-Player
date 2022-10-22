@@ -24,14 +24,14 @@ class PlayableTest {
     @BeforeEach
     void setUp() {
         artistTest1 = new Artist("Riot Games");
-        songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav",
+        songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav",
                 albumTest1);
         albumTest1 = new Album(artistTest1, "Legends Album");
         albumTest1.addToListOfSongs(songTest1);
 
         artistTest2 = new Artist("Dua Lipa");
-        songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
-        songTest3 = new Song(artistTest2, "Levitating", "./resources/Dua Lipa - Levitating.wav",
+        songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav", albumTest2);
+        songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav",
                 albumTest2);
         albumTest2 = new Album(artistTest2, "Future Nostalgia");
         albumTest2.addToListOfSongs(songTest2);
@@ -48,9 +48,9 @@ class PlayableTest {
         assertEquals(songTest2.getTitle(), "One Kiss");
         assertEquals(songTest3.getTitle(), "Levitating");
 
-        assertEquals(songTest1.getFilePath(), "./resources/Legends-Never-Die.wav");
-        assertEquals(songTest2.getFilePath(), "./resources/Dua Lipa - One Kiss.wav");
-        assertEquals(songTest3.getFilePath(), "./resources/Dua Lipa - Levitating.wav");
+        assertEquals(songTest1.getFilePath(), "./data/Legends-Never-Die.wav");
+        assertEquals(songTest2.getFilePath(), "./data/Dua Lipa - One Kiss.wav");
+        assertEquals(songTest3.getFilePath(), "./data/Dua Lipa - Levitating.wav");
     }
 }
 

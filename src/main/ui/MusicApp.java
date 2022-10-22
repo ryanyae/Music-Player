@@ -19,6 +19,8 @@ import java.util.Scanner;
 // Represents the main function that will run the whole application.
 public class MusicApp {
 
+    private static final String JSON_PERSISTENCE = "./data/playlists.json";
+
     Artist riotGames = new Artist("Riot Games");
     Song legendsNeverDieSong;
     Song awakenLeagueSong;
@@ -93,21 +95,21 @@ public class MusicApp {
     // EFFECTS: initializes all the songs and albums that our application has
     private void initializeWorld() {
         legendsNeverDieSong = new Song(riotGames,
-                "Legends Never Die", "./resources/Legends-Never-Die.wav",
+                "Legends Never Die", "./data/Legends-Never-Die.wav",
                 legendsAlbum);
         awakenLeagueSong = new Song(riotGames,
-                "Awaken", "./resources/League Of Legends - Awaken.wav", legendsAlbum);
+                "Awaken", "./data/League Of Legends - Awaken.wav", legendsAlbum);
         legendsAlbum = new Album(riotGames, "New Season Album");
         legendsAlbum.addToListOfSongs(awakenLeagueSong);
         legendsAlbum.addToListOfSongs(legendsNeverDieSong);
         riotGames.newAlbumsMade(legendsAlbum);
 
         duaLipaOneKiss = new Song(duaLipa,
-                "One Kiss", "./resources/Dua Lipa - One Kiss.wav", duaLipaAlbum);
+                "One Kiss", "./data/Dua Lipa - One Kiss.wav", duaLipaAlbum);
         duaLipaLevitating = new Song(duaLipa,
-                "Levitating", "./resources/Dua Lipa - Levitating.wav", duaLipaAlbum);
+                "Levitating", "./data/Dua Lipa - Levitating.wav", duaLipaAlbum);
         duaLipaFutureNostalgia = new Song(duaLipa,
-                "Future Nostalgia", "./resources/Dua Lipa - Future Nostalgia.wav", duaLipaAlbum);
+                "Future Nostalgia", "./data/Dua Lipa - Future Nostalgia.wav", duaLipaAlbum);
         duaLipaLevitating.addFeature(daBaby);
         duaLipaAlbum = new Album(duaLipa, "Dua Lipa Hits");
         duaLipaAlbum.addToListOfSongs(duaLipaOneKiss);

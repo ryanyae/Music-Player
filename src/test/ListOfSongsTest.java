@@ -31,14 +31,14 @@ public class ListOfSongsTest {
         artistTest2 = new Artist("Dua Lipa");
 
 
-        songTest1 = new Song(artistTest1, "Legends Never Die", "./resources/Legends-Never-Die.wav",
+        songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav",
                 albumTest1);
         albumTest1 = new Album(artistTest1, "Legends Album");
         albumTest1.addToListOfSongs(songTest1);
         artistTest1.newAlbumsMade(albumTest1);
 
 
-        songTest2 = new Song(artistTest2, "One Kiss", "./resources/Dua Lipa - One Kiss.wav", albumTest2);
+        songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav", albumTest2);
         albumTest2 = new Album(artistTest2, "One Kiss Album");
         albumTest2.addToListOfSongs(songTest2);
         artistTest2.newAlbumsMade(albumTest2);
