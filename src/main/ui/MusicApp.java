@@ -2,15 +2,21 @@ package ui;
 
 import model.Artist;
 import model.ListOfPlaylists;
-import model.playable.Playable;
-import model.songstate.SongState;
 import model.listofsongs.Album;
 import model.listofsongs.Playlist;
+import model.persistence.JsonRead;
+import model.persistence.JsonWrite;
+import model.playable.Playable;
 import model.playable.Song;
+import model.songstate.SongState;
 import model.songstate.State;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,6 +26,8 @@ import java.util.Scanner;
 public class MusicApp {
 
     private static final String JSON_PERSISTENCE = "./data/playlists.json";
+    private JsonWrite jsonWriter;
+    private JsonRead jsonReader;
 
     Artist riotGames = new Artist("Riot Games");
     Song legendsNeverDieSong;
@@ -41,6 +49,8 @@ public class MusicApp {
     ArrayList<Song> allSongs;
 
     public MusicApp() {
+        jsonWriter = new JsonWrite(JSON_PERSISTENCE);
+        jsonReader = new JsonRead(JSON_PERSISTENCE);
         runMusicApp();
     }
 
@@ -494,6 +504,25 @@ public class MusicApp {
             System.out.println("--------------------------------------"
                     + "\n" + e.getMessage()
                     + "\n -------------------------------------");
+        }
+    }
+
+    public void savePlaylist() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(currentPlayLists);
+            jsonWriter.close();
+            System.out.println("Saved all playlists to " + JSON_PERSISTENCE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to read from file: " + JSON_PERSISTENCE);
+        }
+    }
+
+    public void loadPreviousPlaylists() {
+        try {
+            currentPlayLists = jsonReader.read();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

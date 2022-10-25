@@ -1,13 +1,15 @@
 package model.listofsongs;
 
 import model.playable.Playable;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Abstract class that is a list of songs, you are able to change what songs are in the playlist (deleting or adding).
 // This class is extended by 2 other classes (Album and Playlist)
 public abstract class ListOfSongs {
-    protected final String title;                         // title
+    protected final String title;                   // title
 
     protected ArrayList<Playable> songsInAlbum;    // ArrayList that keeps track of all the songs in the ListOfSongs
 
@@ -40,4 +42,18 @@ public abstract class ListOfSongs {
         return songsInAlbum.get(i);
     }
 
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("playables", playablesToJson());
+        return json;
+    }
+
+    private JSONArray playablesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Playable p:songsInAlbum) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
+    }
 }

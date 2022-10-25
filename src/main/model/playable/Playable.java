@@ -1,6 +1,7 @@
 package model.playable;
 
 import model.Artist;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -40,5 +41,13 @@ public abstract class Playable {
 
     public ArrayList<Artist> getFeatures() {
         return featuredArtists;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("maker", artist);
+        json.put("filePath", filePath);
+        return json;
     }
 }

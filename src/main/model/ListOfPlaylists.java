@@ -1,6 +1,8 @@
 package model;
 
 import model.listofsongs.Playlist;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -50,5 +52,19 @@ public class ListOfPlaylists {
 
     public ArrayList<Playlist> getAllPlaylists() {
         return allPlaylists;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("playlists", playlistToJson());
+        return json;
+    }
+
+    private JSONArray playlistToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Playlist p:allPlaylists) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
     }
 }

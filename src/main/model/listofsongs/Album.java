@@ -1,9 +1,6 @@
 package model.listofsongs;
 
 import model.Artist;
-import model.playable.Playable;
-
-import java.util.ArrayList;
 
 // Represents an album made by an artist, users will only be able to interact with the album, not modify it.
 // Album is an extension of the abstract class "ListOfSongs" in which has many implementations of how a
