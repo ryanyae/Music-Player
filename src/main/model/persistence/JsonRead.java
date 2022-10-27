@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+// Represents a reader that reads ListOfPlaylists from JSON data stored in file
 public class JsonRead {
     private String source;
 
@@ -21,12 +22,15 @@ public class JsonRead {
         this.source = source;
     }
 
+    // EFFECTS: will read a ListOfPlaylists from file and returns it
+    // throws IOException if an error occurs reading data from file
     public ListOfPlaylists read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLOP(jsonObject);
     }
 
+    // EFFECTS: will parse a ListOfPlaylists from JSON object and returns it
     private ListOfPlaylists parseLOP(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("previousPlaylists");
         ListOfPlaylists lop = new ListOfPlaylists();
@@ -34,6 +38,8 @@ public class JsonRead {
         return lop;
     }
 
+    // EFFECTS: for each JSONObject element in the ArrayList of lop, this method will add them to the ListOfPlaylists
+    //          - this method does do any of the actual adding, addPlaylist(...) is responsible for that
     private void addPlaylists(ListOfPlaylists lop, JSONArray jsonArray) {
         for (Object playlistJson:jsonArray) {
             JSONObject nextPlaylist = (JSONObject) playlistJson;
@@ -41,6 +47,7 @@ public class JsonRead {
         }
     }
 
+    // EFFECTS: given a JSONObject that represents 1 playlist, it will add that playlist to the given listOfPlaylists
     private void addPlaylist(ListOfPlaylists lop, JSONObject nextPlaylist) {
         String playlistTitle = nextPlaylist.getString("title");
         JSONArray listOfSongsJson = nextPlaylist.getJSONArray("playables");
@@ -48,6 +55,7 @@ public class JsonRead {
         parsePlaylistJson(listOfSongsJson, new Playlist(playlistTitle), lop);
     }
 
+    // EFFECTS: parse through a list of songs from a given playlist and adds it to the given playlist object
     private void parsePlaylistJson(JSONArray listOfSongsJson, Playlist playlist, ListOfPlaylists listOfPlaylists) {
         for (Object p:listOfSongsJson) {
             JSONObject nextPlayable = (JSONObject) p;
@@ -56,6 +64,7 @@ public class JsonRead {
         listOfPlaylists.addNewPlaylist(playlist);
     }
 
+    // EFFECTS: adds a give JSONObject, that represents a song object, to a given playlist
     private void addPlayable(Playlist playlist, JSONObject p) {
 
         String songTitle = p.getString("title");
@@ -70,16 +79,7 @@ public class JsonRead {
 
     }
 
-//    private ArrayList<String> jsonStringArrayConv(JSONArray songsMade) {
-//        ArrayList<String> dummyList = new ArrayList<>();
-//        for (Object json:songsMade) {
-//            JSONObject s = (JSONObject) json;
-//            dummyList.add(String.valueOf(s));
-//        }
-//        return dummyList;
-//    }
-
-
+    // EFFECTS: reads source file as string and returns it
     public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 

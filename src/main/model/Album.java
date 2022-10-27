@@ -24,25 +24,9 @@ public class Album {
         return artist;
     }
 
-
     public void addToListOfSongs(Song playable) {
         songsInAlbum.add(playable.getTitle());
     }
-
-//    public JSONObject toJson() {
-//        JSONObject json = new JSONObject();
-//        json.put("title", title);
-//        json.put("songsInAlbum", stringListToJson(songsInAlbum));
-//        return json;
-//    }
-//
-//    private JSONArray stringListToJson(ArrayList<String> songsInAlbum) {
-//        JSONArray jsonArray = new JSONArray();
-//        for (String s: songsInAlbum) {
-//            jsonArray.put(s);
-//        }
-//        return jsonArray;
-//    }
 
     public ArrayList<String> getListOfSongs() {
         return songsInAlbum;

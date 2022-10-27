@@ -24,6 +24,4 @@ public class Playlist extends ListOfSongs {
     public Boolean isSongInAlbum(Song song) {
         return songsInAlbum.contains(song);
     }
-
-
 }

@@ -39,10 +39,12 @@ public abstract class ListOfSongs implements Writable {
         songsInAlbum.add(playable);
     }
 
+    // EFFECTS: with a given integer, this method will return a song at the given index
     public Song getSongByIndex(int i) {
         return songsInAlbum.get(i);
     }
 
+    // EFFECTS: will convert a given ListOfSongs into a JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("title", title);
@@ -50,6 +52,7 @@ public abstract class ListOfSongs implements Writable {
         return json;
     }
 
+    // EFFECTS: will convert songsInAlbum into a JSONArray
     private JSONArray playablesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Song p:songsInAlbum) {
