@@ -1,6 +1,6 @@
 package model;
 
-import model.Artist;
+import model.persistence.Writable;
 import model.playable.Playable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 // Represents an album made by an artist, users will only be able to interact with the album, not modify it.
 // Album is an extension of the abstract class "ListOfSongs" in which has many implementations of how a
 //      list of songs may work.
-public class Album {
+public class Album implements Writable {
 
-    private String title;
+    private final String title;
     private ArrayList<String> songsInAlbum;
     private final Artist artist;                                     // Artist that made the album
 

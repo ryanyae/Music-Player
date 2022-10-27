@@ -15,18 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class JsonWriteTest {
-    private Artist artistTest1;
-
-    private Artist artistTest2;
-
-    private Song songTest1;
-
-    private Song songTest2;
-
-    private Song songTest3;
-
-    private Album albumTest1;
-    private Album albumTest2;
 
 
     @Test
@@ -63,15 +51,15 @@ public class JsonWriteTest {
         try {
             ListOfPlaylists lop = new ListOfPlaylists();
 
-            artistTest1 = new Artist("Riot Games");
-            songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav");
-            albumTest1 = new Album(artistTest1, "Legends Album");
+            Artist artistTest1 = new Artist("Riot Games");
+            Song songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav");
+            Album albumTest1 = new Album(artistTest1, "Legends Album");
             albumTest1.addToListOfSongs(songTest1);
 
-            artistTest2 = new Artist("Dua Lipa");
-            songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
-            songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav");
-            albumTest2 = new Album(artistTest2, "Future Nostalgia");
+            Artist artistTest2 = new Artist("Dua Lipa");
+            Song songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
+            Song songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav");
+            Album albumTest2 = new Album(artistTest2, "Future Nostalgia");
             albumTest2.addToListOfSongs(songTest2);
             albumTest2.addToListOfSongs(songTest3);
 

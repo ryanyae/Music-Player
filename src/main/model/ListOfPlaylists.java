@@ -1,13 +1,14 @@
 package model;
 
 import model.listofsongs.Playlist;
+import model.persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Represents a list of playlists that the user may have, this user could have 0 playlist of 100.
-public class ListOfPlaylists {
+public class ListOfPlaylists implements Writable {
 
     ArrayList<Playlist> allPlaylists;       // all the playlists of the user
 

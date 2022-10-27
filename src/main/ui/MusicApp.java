@@ -111,7 +111,7 @@ public class MusicApp {
         legendsAlbum = new Album(riotGames, "New Season Album");
         legendsAlbum.addToListOfSongs(awakenLeagueSong);
         legendsAlbum.addToListOfSongs(legendsNeverDieSong);
-        riotGames.newAlbumsMade(legendsAlbum);
+//        riotGames.newAlbumsMade(legendsAlbum);
 
         duaLipaOneKiss = new Song(duaLipa,
                 "One Kiss", "./data/Dua Lipa - One Kiss.wav");
@@ -124,7 +124,7 @@ public class MusicApp {
         duaLipaAlbum.addToListOfSongs(duaLipaOneKiss);
         duaLipaAlbum.addToListOfSongs(duaLipaLevitating);
         duaLipaAlbum.addToListOfSongs(duaLipaFutureNostalgia);
-        duaLipa.newAlbumsMade(duaLipaAlbum);
+//        duaLipa.newAlbumsMade(duaLipaAlbum);
         allSongs = new ArrayList<>(Arrays.asList(legendsNeverDieSong, awakenLeagueSong,
                 duaLipaOneKiss, duaLipaLevitating, duaLipaFutureNostalgia));
     }

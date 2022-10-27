@@ -1,5 +1,6 @@
 package model.listofsongs;
 
+import model.persistence.Writable;
 import model.playable.Playable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 // Abstract class that is a list of songs, you are able to change what songs are in the playlist (deleting or adding).
 // This class is extended by 2 other classes (Album and Playlist)
-public abstract class ListOfSongs {
+public abstract class ListOfSongs implements Writable {
     protected final String title;                   // title
 
     protected ArrayList<Playable> songsInAlbum;    // ArrayList that keeps track of all the songs in the ListOfSongs

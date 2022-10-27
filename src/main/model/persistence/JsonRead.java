@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class JsonRead {
@@ -58,25 +57,27 @@ public class JsonRead {
     }
 
     private void addPlayable(Playlist playlist, JSONObject p) {
+
         String songTitle = p.getString("title");
         JSONObject songMaker = p.getJSONObject("maker");
         String songFilePath = p.getString("filePath");
-        //            playlist.addToListOfSongs(new Song(songTitle, (new Artist(songMaker.getString("name"),
-//                    jsonStringArrayConv(songMaker.getJSONArray("songsMade")),
-//                    jsonStringArrayConv(songMaker.getJSONArray("albumsMade")))), songFilePath));
 
-        playlist.addToListOfSongs(new Song(new Artist(songMaker.getString("name")), songTitle,
+
+        Artist a = new Artist(songMaker.getString("name"));
+
+        playlist.addToListOfSongs(new Song(a, songTitle,
                 songFilePath));
+
     }
 
-    private ArrayList<String> jsonStringArrayConv(JSONArray songsMade) {
-        ArrayList<String> dummyList = new ArrayList<>();
-        for (Object json:songsMade) {
-            JSONObject s = (JSONObject) json;
-            dummyList.add(String.valueOf(s));
-        }
-        return dummyList;
-    }
+//    private ArrayList<String> jsonStringArrayConv(JSONArray songsMade) {
+//        ArrayList<String> dummyList = new ArrayList<>();
+//        for (Object json:songsMade) {
+//            JSONObject s = (JSONObject) json;
+//            dummyList.add(String.valueOf(s));
+//        }
+//        return dummyList;
+//    }
 
 
     public String readFile(String source) throws IOException {

@@ -3,11 +3,7 @@
         "title": "Test 1",
         "playables": [{
             "filePath": "./data/Legends-Never-Die.wav",
-            "maker": {
-                "albumsMade": [],
-                "name": "Riot Games",
-                "songsMade": []
-            },
+            "maker": {"name": "Riot Games"},
             "title": "Legends Never Die"
         }]
     },
@@ -16,20 +12,12 @@
         "playables": [
             {
                 "filePath": "./data/Dua Lipa - One Kiss.wav",
-                "maker": {
-                    "albumsMade": [],
-                    "name": "Dua Lipa",
-                    "songsMade": []
-                },
+                "maker": {"name": "Dua Lipa"},
                 "title": "One Kiss"
             },
             {
                 "filePath": "./data/Dua Lipa - Levitating.wav",
-                "maker": {
-                    "albumsMade": [],
-                    "name": "Dua Lipa",
-                    "songsMade": []
-                },
+                "maker": {"name": "Dua Lipa"},
                 "title": "Levitating"
             }
         ]

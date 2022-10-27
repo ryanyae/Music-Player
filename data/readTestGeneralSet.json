@@ -7,32 +7,17 @@
           "title": "Future Nostalgia",
           "maker":
             {
-              "name": "Dua Lipa",
-              "songsMade": [
-                "One Kiss",
-                "Levitating",
-                "Future Nostalgia"
-              ],
-              "albumsMade": [
-                "Dua Lipa Hits"
-              ]
+              "name": "Dua Lipa"
             },
-          "filePath": "test-stub"
+          "filePath": "test-stub1"
         },
         {
           "title": "Legends Never Die",
           "maker":
             {
-              "name": "Riot Games",
-              "songsMade": [
-                "Legends Never Die",
-                "Awaken"
-              ],
-              "albumsMade": [
-                "New Season Album"
-              ]
+              "name": "Riot Games"
             },
-          "filePath": "test-stub"
+          "filePath": "test-stub2"
         }
       ]
     }
