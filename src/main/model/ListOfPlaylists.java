@@ -56,7 +56,7 @@ public class ListOfPlaylists {
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("playlists", playlistToJson());
+        json.put("previousPlaylists", playlistToJson());
         return json;
     }
 

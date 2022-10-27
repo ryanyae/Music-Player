@@ -46,7 +46,7 @@ public abstract class Playable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("title", title);
-        json.put("maker", artist);
+        json.put("maker", artist.toJson());
         json.put("filePath", filePath);
         return json;
     }

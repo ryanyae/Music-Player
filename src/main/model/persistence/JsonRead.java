@@ -1,10 +1,12 @@
 package model.persistence;
 
+import model.ListOfPlaylists;
+import model.exceptions.SongNotFoundException;
 import model.listofsongs.Playlist;
-import model.playable.Playable;
 import model.playable.Song;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.MusicApp;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,41 +22,66 @@ public class JsonRead {
         this.source = source;
     }
 
-    public Playlist read() throws IOException {
+    public ListOfPlaylists read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parsePlaylist(jsonObject);
+        return parseLOP(jsonObject);
     }
 
-    private Playlist parsePlaylist(JSONObject jsonObject) {
-        String title = jsonObject.getString("title");
-        Playlist p = new Playlist(title);
-        addPlaylist(p, jsonObject);
-        return p;
+    private ListOfPlaylists parseLOP(JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("previousPlaylists");
+        ListOfPlaylists lop = new ListOfPlaylists();
+        addPlaylists(lop, jsonArray);
+        return lop;
     }
 
-    private void addPlaylist(Playlist p, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("playables");
-        for (Object json:jsonArray) {
-            JSONObject nextPlayable = (JSONObject) json;
-            addPlayable(p, nextPlayable);
+    private void addPlaylists(ListOfPlaylists lop, JSONArray jsonArray) {
+        for (Object playlistJson:jsonArray) {
+            JSONObject nextPlaylist = (JSONObject) playlistJson;
+            addPlaylist(lop, nextPlaylist);
         }
     }
 
-    private void addPlayable(Playlist p, JSONObject nextPlayable) {
-        String name = nextPlayable.getString("title");
-        String maker = nextPlayable.getString("maker");
-        String filePath = nextPlayable.getString("filePath");
-        String album = nextPlayable.getString("album");
-        Playable playable = new Song(maker, name, filePath);
+    private void addPlaylist(ListOfPlaylists lop, JSONObject nextPlaylist) {
+        String playlistTitle = nextPlaylist.getString("title");
+        JSONArray listOfSongsJson = nextPlaylist.getJSONArray("playables");
+
+        parsePlaylistJson(listOfSongsJson, new Playlist(playlistTitle), lop);
+    }
+
+    private void parsePlaylistJson(JSONArray listOfSongsJson, Playlist playlist, ListOfPlaylists listOfPlaylists) {
+        for (Object p:listOfSongsJson) {
+            JSONObject nextPlayable = (JSONObject) p;
+            addPlayable(playlist, nextPlayable);
+            listOfPlaylists.addNewPlaylist(playlist);
+        }
+    }
+
+    private void addPlayable(Playlist playlist, JSONObject p) {
+        String songTitle = p.getString("title");
+        try {
+            playlist.addToListOfSongs(searchForSong(songTitle));
+        } catch (SongNotFoundException e) {
+            System.out.println("could not properly load song");
+        }
+    }
+
+    private Song searchForSong(String songTitle) throws SongNotFoundException {
+
+        for (Song s: MusicApp.getAllSongs()) {
+            if (s.getTitle().equals(songTitle)) {
+                return s;
+            }
+        }
+        throw new SongNotFoundException();
     }
 
 
     public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines(Paths.get(this.source), StandardCharsets.UTF_8)) {
-            stream.forEach(contentBuilder::append);
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s));
         }
 
         return contentBuilder.toString();

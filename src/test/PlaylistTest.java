@@ -1,5 +1,5 @@
 import model.Artist;
-import model.listofsongs.Album;
+import model.Album;
 import model.listofsongs.Playlist;
 import model.playable.Song;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,12 +20,9 @@ public class PlaylistTest {
     @BeforeEach
     void setUp() {
         duaLipaTest = new Artist("Dua Lipa");
-        songTest1 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav",
-                albumTest1);
-        songTest2 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating",
-                albumTest1);
-        songTest3 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav",
-                albumTest1);
+        songTest1 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav");
+        songTest2 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating");
+        songTest3 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
         albumTest1 = new Album(duaLipaTest, "Dua Lipa Album Test");
         playlistTest1 = new Playlist("Playlist Test");
 

@@ -1,17 +1,18 @@
 package model;
 
-import model.listofsongs.Album;
 import model.playable.Playable;
 import model.playable.Song;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Represents that can make podcasts and songs, they are also able to make albums that are an accumulation of songs
 // that the artist have made.
 public class Artist {
-    ArrayList<Playable> songsMade;          // list of all the songs that the artist may have made
+    ArrayList<String> songsMade;          // list of all the songs that the artist may have made
 
-    ArrayList<Album> albumsMade;            // list of all the albums that the artist may have made
+    ArrayList<String> albumsMade;            // list of all the albums that the artist may have made
 
     String name;                            // stage name of the artist
 
@@ -24,16 +25,16 @@ public class Artist {
         this.albumsMade = new ArrayList<>();
     }
 
-    public ArrayList<Playable> getSongsMade() {
+    public ArrayList<String> getSongsMade() {
         return songsMade;
     }
 
-    public ArrayList<Album> getAlbumsMade() {
+    public ArrayList<String> getAlbumsMade() {
         return albumsMade;
     }
 
     public void newSongMade(Song song) {
-        songsMade.add(song);
+        songsMade.add(song.getTitle());
     }
 
     // REQUIRES: album.getListOfSongs().size() > 0
@@ -42,9 +43,9 @@ public class Artist {
     //          the artist's "songsMade" ArrayList, regardless of duplication.
     public boolean newAlbumsMade(Album album) {
         if (album.getListOfSongs().size() != 0) {
-            albumsMade.add(album);
-            for (Playable song :album.getListOfSongs()) {
-                songsMade.add(song);
+            albumsMade.add(album.getAlbumTitle());
+            for (String songString :album.getListOfSongs()) {
+                songsMade.add(songString);
             }
             return true;
         }
@@ -54,4 +55,29 @@ public class Artist {
     public String getName() {
         return name;
     }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("songsMade", songsMadeToJson());
+        json.put("albumsMade", albumsMadeToJson());
+        return json;
+    }
+
+    private JSONArray albumsMadeToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (String a:albumsMade) {
+            jsonArray.put(a);
+        }
+        return jsonArray;
+    }
+
+    private JSONArray songsMadeToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (String p:songsMade) {
+            jsonArray.put(p);
+        }
+        return jsonArray;
+    }
+
 }

@@ -2,7 +2,7 @@ package ui;
 
 import model.Artist;
 import model.ListOfPlaylists;
-import model.listofsongs.Album;
+import model.Album;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
@@ -46,7 +46,7 @@ public class MusicApp {
 
     ListOfPlaylists currentPlayLists;
 
-    ArrayList<Song> allSongs;
+    static ArrayList<Song> allSongs;
 
     public MusicApp() {
         jsonWriter = new JsonWrite(JSON_PERSISTENCE);
@@ -105,21 +105,20 @@ public class MusicApp {
     // EFFECTS: initializes all the songs and albums that our application has
     private void initializeWorld() {
         legendsNeverDieSong = new Song(riotGames,
-                "Legends Never Die", "./data/Legends-Never-Die.wav",
-                legendsAlbum);
+                "Legends Never Die", "./data/Legends-Never-Die.wav");
         awakenLeagueSong = new Song(riotGames,
-                "Awaken", "./data/League Of Legends - Awaken.wav", legendsAlbum);
+                "Awaken", "./data/League Of Legends - Awaken.wav");
         legendsAlbum = new Album(riotGames, "New Season Album");
         legendsAlbum.addToListOfSongs(awakenLeagueSong);
         legendsAlbum.addToListOfSongs(legendsNeverDieSong);
         riotGames.newAlbumsMade(legendsAlbum);
 
         duaLipaOneKiss = new Song(duaLipa,
-                "One Kiss", "./data/Dua Lipa - One Kiss.wav", duaLipaAlbum);
+                "One Kiss", "./data/Dua Lipa - One Kiss.wav");
         duaLipaLevitating = new Song(duaLipa,
-                "Levitating", "./data/Dua Lipa - Levitating.wav", duaLipaAlbum);
+                "Levitating", "./data/Dua Lipa - Levitating.wav");
         duaLipaFutureNostalgia = new Song(duaLipa,
-                "Future Nostalgia", "./data/Dua Lipa - Future Nostalgia.wav", duaLipaAlbum);
+                "Future Nostalgia", "./data/Dua Lipa - Future Nostalgia.wav");
         duaLipaLevitating.addFeature(daBaby);
         duaLipaAlbum = new Album(duaLipa, "Dua Lipa Hits");
         duaLipaAlbum.addToListOfSongs(duaLipaOneKiss);
@@ -524,5 +523,9 @@ public class MusicApp {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ArrayList<Song> getAllSongs() {
+        return allSongs;
     }
 }

@@ -1,5 +1,5 @@
 import model.Artist;
-import model.listofsongs.Album;
+import model.Album;
 import model.playable.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,29 +32,26 @@ public class ArtistTest {
         duaLipaTest = new Artist("Dua Lipa");
         daBabyTest = new Artist("DaBaby");
 
-        songTest1 = new Song(riotGamesTest, "Legends Never Die", "./data/Legends Never Die.wav",
-                albumTest1);
+        songTest1 = new Song(riotGamesTest, "Legends Never Die", "./data/Legends Never Die.wav");
         albumTest1 = new Album(riotGamesTest, "Riot Games Album Test 1");
         albumTest1.addToListOfSongs(songTest1);
         riotGamesTest.newAlbumsMade(albumTest1);
 
-        songTest2 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav", albumTest2);
+        songTest2 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
         albumTest2 = new Album(duaLipaTest, "Dua Lipa Album Test 1");
         albumTest2.addToListOfSongs(songTest2);
         duaLipaTest.newAlbumsMade(albumTest2);
 
-        songTest4 = new Song(riotGamesTest, "Awaken", "/data/League Of Legends - Awaken",
-                albumTest3);
+        songTest4 = new Song(riotGamesTest, "Awaken", "/data/League Of Legends - Awaken");
         albumTest3 = new Album(riotGamesTest, "Riot Games Album Test 2");
         albumTest3.addToListOfSongs(songTest4);
         riotGamesTest.newAlbumsMade(albumTest3);
 
 
         albumTest4 = new Album(duaLipaTest, "Dua Lipa Album Test 2");
-        songTest3 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating", albumTest4);
+        songTest3 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating");
         albumTest4.addToListOfSongs(songTest3);
-        songTest5 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav",
-                albumTest4);
+        songTest5 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav");
         albumTest4.addToListOfSongs(songTest5);
         duaLipaTest.newAlbumsMade(albumTest4);
     }
@@ -68,40 +65,62 @@ public class ArtistTest {
 
     @Test
     void getSongsMadeTest() {
-        assertEquals(riotGamesTest.getSongsMade(), new ArrayList<>(Arrays.asList(songTest1, songTest4)));
-        assertEquals(duaLipaTest.getSongsMade(), new ArrayList<>(Arrays.asList(songTest2, songTest3, songTest5)));
+        assertTrue(riotGamesTest.getSongsMade().contains(songTest1.getTitle()));
+        assertTrue(riotGamesTest.getSongsMade().contains(songTest4.getTitle()));
+        assertFalse(riotGamesTest.getSongsMade().contains(songTest2.getTitle()));
+        assertFalse(riotGamesTest.getSongsMade().contains(songTest3.getTitle()));
+        assertFalse(riotGamesTest.getSongsMade().contains(songTest5.getTitle()));
+
+
+        assertFalse(duaLipaTest.getSongsMade().contains(songTest1.getTitle()));
+        assertFalse(duaLipaTest.getSongsMade().contains(songTest4.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest2.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest3.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest5.getTitle()));
     }
 
     @Test
     void newSongMadeTest() {
-        Song songTest6 =  new Song(duaLipaTest, "That Kind of Woman", "stub", albumTest4);
+        Song songTest6 =  new Song(duaLipaTest, "That Kind of Woman", "stub");
         albumTest4.addToListOfSongs(songTest6);
         duaLipaTest.newSongMade(songTest6);
 
-        assertTrue(albumTest4.getListOfSongs().contains(songTest6));
-        assertTrue(duaLipaTest.getSongsMade().contains(songTest6));
+        assertTrue(albumTest4.getListOfSongs().contains(songTest6.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest6.getTitle()));
     }
 
     @Test
     void getAlbumsMadeTest() {
-        assertEquals(riotGamesTest.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest1, albumTest3)));
-        assertEquals(duaLipaTest.getAlbumsMade(),  new ArrayList<>(Arrays.asList(albumTest2, albumTest4)));
+        assertTrue(riotGamesTest.getAlbumsMade().contains(albumTest1.getAlbumTitle()));
+        assertTrue(riotGamesTest.getAlbumsMade().contains(albumTest3.getAlbumTitle()));
+        assertFalse(riotGamesTest.getAlbumsMade().contains(albumTest2.getAlbumTitle()));
+        assertFalse(riotGamesTest.getAlbumsMade().contains(albumTest4.getAlbumTitle()));
+
+        assertFalse(duaLipaTest.getAlbumsMade().contains(albumTest1.getAlbumTitle()));
+        assertFalse(duaLipaTest.getAlbumsMade().contains(albumTest3.getAlbumTitle()));
+        assertTrue(duaLipaTest.getAlbumsMade().contains(albumTest2.getAlbumTitle()));
+        assertTrue(duaLipaTest.getAlbumsMade().contains(albumTest4.getAlbumTitle()));
     }
 
     @Test
     void newAlbumsMadeTest() {
-        assertFalse(duaLipaTest.newAlbumsMade(new Album(riotGamesTest, "Random Dua Lipa Album")));
-        assertEquals(duaLipaTest.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest2, albumTest4)));
-        assertEquals(duaLipaTest.getSongsMade(), new ArrayList<>(Arrays.asList(songTest2, songTest3, songTest5)));
+        assertFalse(duaLipaTest.newAlbumsMade(new Album(duaLipaTest, "Random Dua Lipa Album")));
 
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest2.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest3.getTitle()));
+        assertTrue(duaLipaTest.getSongsMade().contains(songTest5.getTitle()));
 
-        Album randonAlbumTest = new Album(duaLipaTest, "Random Dua Lipa Album");
-
+        Album randonAlbumTest = new Album(riotGamesTest, "Random Riot Games Album");
         randonAlbumTest.addToListOfSongs(songTest2);
-        assertTrue(riotGamesTest.newAlbumsMade(randonAlbumTest));
-        assertEquals(riotGamesTest.getAlbumsMade(), new ArrayList<>(Arrays.asList(albumTest1, albumTest3,
-                randonAlbumTest)));
-        assertEquals(riotGamesTest.getSongsMade(), new ArrayList<>(Arrays.asList(songTest1, songTest4, songTest2)));
 
+        assertTrue(riotGamesTest.newAlbumsMade(randonAlbumTest));
+
+        assertTrue(riotGamesTest.getAlbumsMade().contains(albumTest1.getAlbumTitle()));
+        assertTrue(riotGamesTest.getAlbumsMade().contains(albumTest3.getAlbumTitle()));
+        assertTrue(riotGamesTest.getAlbumsMade().contains(randonAlbumTest.getAlbumTitle()));
+
+        assertTrue(riotGamesTest.getSongsMade().contains(songTest1.getTitle()));
+        assertTrue(riotGamesTest.getSongsMade().contains(songTest4.getTitle()));
+        assertTrue(riotGamesTest.getSongsMade().contains(songTest2.getTitle()));
     }
 }
