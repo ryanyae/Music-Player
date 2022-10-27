@@ -520,7 +520,8 @@ public class MusicApp {
             jsonWriter.open();
             jsonWriter.write(currentPlayLists);
             jsonWriter.close();
-            System.out.println("Saved all playlists to " + JSON_PERSISTENCE);
+            System.out.println("\n" + "Saved all playlists to " + JSON_PERSISTENCE
+                    + "\n");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to read from file: " + JSON_PERSISTENCE);
         }
@@ -541,6 +542,8 @@ public class MusicApp {
     public void loadPreviousPlaylists() {
         try {
             currentPlayLists = jsonReader.read();
+            System.out.println("\n" + "Loaded all playlists from " + JSON_PERSISTENCE
+                    + "\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

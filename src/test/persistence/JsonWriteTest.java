@@ -81,6 +81,29 @@ public class JsonWriteTest {
             JsonRead reader = new JsonRead("./data/testWriteGeneralListOfPlaylists");
             lop = reader.read();
             assertEquals(2, lop.getLength());
+
+            assertEquals("Test 1", lop.getPlaylistByIndex(0).getPlaylistTitle());
+            assertEquals("./data/Legends-Never-Die.wav",
+                    lop.getPlaylistByIndex(0).getSongByIndex(0).getFilePath());
+            assertEquals("Riot Games",
+                    lop.getPlaylistByIndex(0).getSongByIndex(0).getArtist().getName());
+            assertEquals("Legends Never Die",
+                    lop.getPlaylistByIndex(0).getSongByIndex(0).getTitle());
+
+            assertEquals("Test 2", lop.getPlaylistByIndex(1).getPlaylistTitle());
+            assertEquals("./data/Dua Lipa - One Kiss.wav",
+                    lop.getPlaylistByIndex(1).getSongByIndex(0).getFilePath());
+            assertEquals("Dua Lipa",
+                    lop.getPlaylistByIndex(1).getSongByIndex(0).getArtist().getName());
+            assertEquals("One Kiss",
+                    lop.getPlaylistByIndex(1).getSongByIndex(0).getTitle());
+            assertEquals("./data/Dua Lipa - Levitating.wav",
+                    lop.getPlaylistByIndex(1).getSongByIndex(1).getFilePath());
+            assertEquals("Dua Lipa",
+                    lop.getPlaylistByIndex(1).getSongByIndex(1).getArtist().getName());
+            assertEquals("Levitating",
+                    lop.getPlaylistByIndex(1).getSongByIndex(1).getTitle());
+
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
