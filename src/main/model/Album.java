@@ -1,16 +1,13 @@
 package model;
 
-import model.persistence.Writable;
 import model.playable.Playable;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Represents an album made by an artist, users will only be able to interact with the album, not modify it.
 // Album is an extension of the abstract class "ListOfSongs" in which has many implementations of how a
 //      list of songs may work.
-public class Album implements Writable {
+public class Album {
 
     private final String title;
     private ArrayList<String> songsInAlbum;
@@ -34,20 +31,20 @@ public class Album implements Writable {
         songsInAlbum.add(playable.getTitle());
     }
 
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("title", title);
-        json.put("songsInAlbum", stringListToJson(songsInAlbum));
-        return json;
-    }
-
-    private JSONArray stringListToJson(ArrayList<String> songsInAlbum) {
-        JSONArray jsonArray = new JSONArray();
-        for (String s: songsInAlbum) {
-            jsonArray.put(s);
-        }
-        return jsonArray;
-    }
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("title", title);
+//        json.put("songsInAlbum", stringListToJson(songsInAlbum));
+//        return json;
+//    }
+//
+//    private JSONArray stringListToJson(ArrayList<String> songsInAlbum) {
+//        JSONArray jsonArray = new JSONArray();
+//        for (String s: songsInAlbum) {
+//            jsonArray.put(s);
+//        }
+//        return jsonArray;
+//    }
 
     public ArrayList<String> getListOfSongs() {
         return songsInAlbum;
