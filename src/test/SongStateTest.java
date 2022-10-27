@@ -13,6 +13,9 @@ public class SongStateTest {
         songStateTest1 = new SongState();
         assertEquals(songStateTest1.getState(), State.PLAYING);
         songStateTest1.setSongState(State.PAUSED);
+        songStateTest1.setTimeStamp(100);
+
         assertEquals(songStateTest1.getState(), State.PAUSED);
+        assertEquals(songStateTest1.getTime(), 100);
     }
 }
