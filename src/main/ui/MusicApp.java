@@ -25,9 +25,9 @@ import java.util.Scanner;
 // Represents the main function that will run the whole application.
 public class MusicApp {
 
-    private static final String JSON_PERSISTENCE = "./data/playlists.json";
-    private JsonWrite jsonWriter;
-    private JsonRead jsonReader;
+    private static final String JSON_PERSISTENCE = "./data/savedPlaylists.json";
+    private final JsonWrite jsonWriter;
+    private final JsonRead jsonReader;
 
     Artist riotGames = new Artist("Riot Games");
     Song legendsNeverDieSong;
@@ -135,6 +135,8 @@ public class MusicApp {
         System.out.println("--- Select from the choices down below---");
         System.out.println(" - p -> Go to your playlists");
         System.out.println(" - b -> browse from our collection of songs");
+        System.out.println(" - s -> save playlists that have been made");
+        System.out.println(" - l -> load previous playlists that have been made");
         System.out.println(" - q -> quit the application");
     }
 
@@ -145,6 +147,7 @@ public class MusicApp {
     //              first thing that that method will check for.
     //          - when given an input it will direct the user to either playlistMenu() for "p", allSongsMenu() for "b",
     //              printPlaylistsMenu() for "v", and createPlaylistMenu() for "c".
+    @SuppressWarnings("methodlength")
     private void processMenuInput(String userInput) {
         switch (userInput) {
             case "p":
@@ -161,6 +164,12 @@ public class MusicApp {
                 break;
             case "d":
                 deletePlaylistMenu();
+                break;
+            case "s":
+                savePlaylist();
+                break;
+            case "l":
+                loadPreviousPlaylists();
                 break;
             default:
                 System.out.println("-------------------------"
@@ -517,6 +526,18 @@ public class MusicApp {
         }
     }
 
+//    // EFFECTS: saves the workroom to file
+//    private void saveWorkRoom() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(workRoom);
+//            jsonWriter.close();
+//            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
+
     public void loadPreviousPlaylists() {
         try {
             currentPlayLists = jsonReader.read();
@@ -525,7 +546,7 @@ public class MusicApp {
         }
     }
 
-    public static ArrayList<Song> getAllSongs() {
-        return allSongs;
-    }
+//    public static ArrayList<Song> getAllSongs() {
+//        return allSongs;
+//    }
 }

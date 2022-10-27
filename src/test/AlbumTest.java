@@ -21,7 +21,6 @@ public class AlbumTest {
         songTest3 = new Song(duaLipaTest, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
         albumTest1 = new Album(duaLipaTest, "Dua Lipa Album Test");
 
-        Artist charliePuth = new Artist("Charlie Puth");
     }
 
     @Test
