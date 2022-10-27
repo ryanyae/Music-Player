@@ -1,6 +1,6 @@
 package model.listofsongs;
 
-import model.playable.Song;
+import model.Song;
 
 // Represents a playlist that a user made, with a given title. The user can freely play songs from this playlist.
 // Is the accumulation of songs made by the user.

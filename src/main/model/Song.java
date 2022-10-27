@@ -1,12 +1,11 @@
-package model.playable;
+package model;
 
-import model.Artist;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Represents an object that is playable, meaning it can be played using a method
-public abstract class Playable {
+public class Song {
     protected String title;                        // title of the playable
     protected Artist artist;                       // artist that made this playable
     protected String filePath;                     // file address of the playable in the project
@@ -16,7 +15,7 @@ public abstract class Playable {
     // EFFECTS: instantiates a new Playable object with a given title, artist, filePath and an
     //          empty ArrayList of features
     //              - filePath is the location of the file within this object.
-    public Playable(String title, Artist artist, String filePath) {
+    public Song(Artist artist, String title, String filePath) {
         this.title = title;
         this.artist = artist;
         this.filePath = filePath;

@@ -1,6 +1,6 @@
 import model.Artist;
 import model.Album;
-import model.playable.Song;
+import model.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

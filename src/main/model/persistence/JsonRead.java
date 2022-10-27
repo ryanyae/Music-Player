@@ -3,7 +3,7 @@ package model.persistence;
 import model.Artist;
 import model.ListOfPlaylists;
 import model.listofsongs.Playlist;
-import model.playable.Song;
+import model.Song;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

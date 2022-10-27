@@ -1,7 +1,5 @@
 package model;
 
-import model.playable.Playable;
-
 import java.util.ArrayList;
 
 // Represents an album made by an artist, users will only be able to interact with the album, not modify it.
@@ -27,7 +25,7 @@ public class Album {
     }
 
 
-    public void addToListOfSongs(Playable playable) {
+    public void addToListOfSongs(Song playable) {
         songsInAlbum.add(playable.getTitle());
     }
 

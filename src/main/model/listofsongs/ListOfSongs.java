@@ -1,7 +1,7 @@
 package model.listofsongs;
 
 import model.persistence.Writable;
-import model.playable.Playable;
+import model.Song;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public abstract class ListOfSongs implements Writable {
     protected final String title;                   // title
 
-    protected ArrayList<Playable> songsInAlbum;    // ArrayList that keeps track of all the songs in the ListOfSongs
+    protected ArrayList<Song> songsInAlbum;    // ArrayList that keeps track of all the songs in the ListOfSongs
 
     // REQUIRES: that the name to be a string of non-zero length
     // EFFECTS: creates a ListOfSongs
@@ -29,17 +29,17 @@ public abstract class ListOfSongs implements Writable {
         return title;
     }
 
-    public ArrayList<Playable> getListOfSongs() {
+    public ArrayList<Song> getListOfSongs() {
         return songsInAlbum;
     }
 
     // MODIFIES: this
     // EFFECTS: adds given song songsInAlbum
-    public void addToListOfSongs(Playable playable) {
+    public void addToListOfSongs(Song playable) {
         songsInAlbum.add(playable);
     }
 
-    public Playable getSongByIndex(int i) {
+    public Song getSongByIndex(int i) {
         return songsInAlbum.get(i);
     }
 
@@ -52,7 +52,7 @@ public abstract class ListOfSongs implements Writable {
 
     private JSONArray playablesToJson() {
         JSONArray jsonArray = new JSONArray();
-        for (Playable p:songsInAlbum) {
+        for (Song p:songsInAlbum) {
             jsonArray.put(p.toJson());
         }
         return jsonArray;

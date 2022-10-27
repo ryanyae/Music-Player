@@ -6,7 +6,7 @@ import model.ListOfPlaylists;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
-import model.playable.Song;
+import model.Song;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

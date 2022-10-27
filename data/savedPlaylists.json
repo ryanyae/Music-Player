@@ -1,1 +1,8 @@
-{"previousPlaylists": []}
+{"previousPlaylists": [{
+    "title": "1234",
+    "playables": [{
+        "filePath": "./data/League Of Legends - Awaken.wav",
+        "maker": {"name": "Riot Games"},
+        "title": "Awaken"
+    }]
+}]}

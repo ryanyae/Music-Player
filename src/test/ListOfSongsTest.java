@@ -1,11 +1,3 @@
-import model.Artist;
-import model.Album;
-import model.playable.Song;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class ListOfSongsTest {
 
 //    private Artist artistTest1;

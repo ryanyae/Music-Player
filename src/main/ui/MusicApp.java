@@ -6,8 +6,7 @@ import model.ListOfPlaylists;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
-import model.playable.Playable;
-import model.playable.Song;
+import model.Song;
 import model.songstate.SongState;
 import model.songstate.State;
 
@@ -87,7 +86,7 @@ public class MusicApp {
     //          - the try, catch is there so that if a file isn't able to be played than the whole code will
     //            not stop running
     //              - if the song isn't able to be played than the catch block will fire a message
-    private void playSong(Playable playable) {
+    private void playSong(Song playable) {
         File musicFile = new File(playable.getFilePath());
         System.out.println("Now playing " + playable.getTitle() + " by " + playable.getArtist().getName());
         try {
@@ -396,7 +395,7 @@ public class MusicApp {
     //                  processSongMenuCommand(...) providing the user input,
     //                  a Clip object (which is the actual object that is playing the song),
     //                  and a States object "songState" (which is the current state of the song).
-    private void songMenu(Clip clip, Playable playable) {
+    private void songMenu(Clip clip, Song playable) {
         boolean keepAlive = true;
         SongState songState = new SongState();
         while (keepAlive) {
@@ -428,7 +427,7 @@ public class MusicApp {
     //                  that's the index in which the new playlist exists at
     //          - if anything fails the catch block will fire an error message
     @SuppressWarnings("methodlength")
-    private void addingSongToPlaylist(Playable playable) {
+    private void addingSongToPlaylist(Song playable) {
         boolean keepAlive = true;
         while (keepAlive) {
             printPlaylistsToAddTo();
