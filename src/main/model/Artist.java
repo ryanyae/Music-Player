@@ -1,6 +1,5 @@
 package model;
 
-import model.playable.Playable;
 import model.playable.Song;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +14,6 @@ public class Artist {
     ArrayList<String> albumsMade;            // list of all the albums that the artist may have made
 
     String name;                            // stage name of the artist
-
 
     // EFFECTS: creates a new artist with the given name, and two new empty ArrayLists that represents
     //          all the songs and albums that the artist may have made

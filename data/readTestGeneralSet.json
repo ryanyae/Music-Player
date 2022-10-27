@@ -5,7 +5,7 @@
       "playables": [
         {
           "title": "Future Nostalgia",
-          "maker": [
+          "maker":
             {
               "name": "Dua Lipa",
               "songsMade": [
@@ -16,13 +16,12 @@
               "albumsMade": [
                 "Dua Lipa Hits"
               ]
-            }
-          ],
+            },
           "filePath": "test-stub"
         },
         {
           "title": "Legends Never Die",
-          "maker": [
+          "maker":
             {
               "name": "Riot Games",
               "songsMade": [
@@ -30,10 +29,9 @@
                 "Awaken"
               ],
               "albumsMade": [
-
+                "New Season Album"
               ]
-            }
-          ],
+            },
           "filePath": "test-stub"
         }
       ]

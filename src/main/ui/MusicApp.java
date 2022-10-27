@@ -1,8 +1,8 @@
 package ui;
 
+import model.Album;
 import model.Artist;
 import model.ListOfPlaylists;
-import model.Album;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;

@@ -1,0 +1,37 @@
+{"previousPlaylists": [
+    {
+        "title": "Test 1",
+        "playables": [{
+            "filePath": "./data/Legends-Never-Die.wav",
+            "maker": {
+                "albumsMade": [],
+                "name": "Riot Games",
+                "songsMade": []
+            },
+            "title": "Legends Never Die"
+        }]
+    },
+    {
+        "title": "Test 2",
+        "playables": [
+            {
+                "filePath": "./data/Dua Lipa - One Kiss.wav",
+                "maker": {
+                    "albumsMade": [],
+                    "name": "Dua Lipa",
+                    "songsMade": []
+                },
+                "title": "One Kiss"
+            },
+            {
+                "filePath": "./data/Dua Lipa - Levitating.wav",
+                "maker": {
+                    "albumsMade": [],
+                    "name": "Dua Lipa",
+                    "songsMade": []
+                },
+                "title": "Levitating"
+            }
+        ]
+    }
+]}

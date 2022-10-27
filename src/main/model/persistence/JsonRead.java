@@ -1,17 +1,17 @@
 package model.persistence;
 
+import model.Artist;
 import model.ListOfPlaylists;
-import model.exceptions.SongNotFoundException;
 import model.listofsongs.Playlist;
 import model.playable.Song;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.MusicApp;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class JsonRead {
@@ -53,27 +53,29 @@ public class JsonRead {
         for (Object p:listOfSongsJson) {
             JSONObject nextPlayable = (JSONObject) p;
             addPlayable(playlist, nextPlayable);
-            listOfPlaylists.addNewPlaylist(playlist);
         }
+        listOfPlaylists.addNewPlaylist(playlist);
     }
 
     private void addPlayable(Playlist playlist, JSONObject p) {
         String songTitle = p.getString("title");
-        try {
-            playlist.addToListOfSongs(searchForSong(songTitle));
-        } catch (SongNotFoundException e) {
-            System.out.println("could not properly load song");
-        }
+        JSONObject songMaker = p.getJSONObject("maker");
+        String songFilePath = p.getString("filePath");
+        //            playlist.addToListOfSongs(new Song(songTitle, (new Artist(songMaker.getString("name"),
+//                    jsonStringArrayConv(songMaker.getJSONArray("songsMade")),
+//                    jsonStringArrayConv(songMaker.getJSONArray("albumsMade")))), songFilePath));
+
+        playlist.addToListOfSongs(new Song(new Artist(songMaker.getString("name")), songTitle,
+                songFilePath));
     }
 
-    private Song searchForSong(String songTitle) throws SongNotFoundException {
-
-        for (Song s: MusicApp.getAllSongs()) {
-            if (s.getTitle().equals(songTitle)) {
-                return s;
-            }
+    private ArrayList<String> jsonStringArrayConv(JSONArray songsMade) {
+        ArrayList<String> dummyList = new ArrayList<>();
+        for (Object json:songsMade) {
+            JSONObject s = (JSONObject) json;
+            dummyList.add(String.valueOf(s));
         }
-        throw new SongNotFoundException();
+        return dummyList;
     }
 
 
