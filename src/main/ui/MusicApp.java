@@ -514,6 +514,8 @@ public class MusicApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: will save currentPlaylists to a JSON file that is readily readable
     public void savePlaylist() {
         try {
             jsonWriter.open();
@@ -526,29 +528,20 @@ public class MusicApp {
         }
     }
 
-//    // EFFECTS: saves the workroom to file
-//    private void saveWorkRoom() {
-//        try {
-//            jsonWriter.open();
-//            jsonWriter.write(workRoom);
-//            jsonWriter.close();
-//            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + JSON_STORE);
-//        }
-//    }
-
+    // MODIFIES: this
+    // EFFECTS: will load all previous playlists to current playlists, and add it on top of already existing playlists
     public void loadPreviousPlaylists() {
         try {
-            currentPlayLists = jsonReader.read();
+            // currentPlaylists = jsonReader.read()
+            ArrayList<Playlist> loadingPlaylists = jsonReader.read().getAllPlaylists();
+
+            for (Playlist p:loadingPlaylists) {
+                currentPlayLists.addNewPlaylist(p);
+            }
             System.out.println("\n" + "Loaded all playlists from " + JSON_PERSISTENCE
                     + "\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-//    public static ArrayList<Song> getAllSongs() {
-//        return allSongs;
-//    }
 }
