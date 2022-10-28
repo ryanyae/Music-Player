@@ -20,7 +20,6 @@ public class JsonReadTest {
             // pass
         }
     }
-
     @Test
     void testReaderEmptyWorkRoom() {
         JsonRead reader = new JsonRead("./data/readTestEmptySet.json");
