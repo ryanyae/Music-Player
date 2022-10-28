@@ -24,6 +24,7 @@ public class Album {
         return artist;
     }
 
+    // EFFECTS: adds a new song to songsInAlbum field
     public void addToListOfSongs(Song playable) {
         songsInAlbum.add(playable.getTitle());
     }
@@ -32,6 +33,7 @@ public class Album {
         return songsInAlbum;
     }
 
+    // EFFECTS: returns an element from songsInAlbum from the given index
     public String getSongByIndex(int i) {
         return songsInAlbum.get(i);
     }

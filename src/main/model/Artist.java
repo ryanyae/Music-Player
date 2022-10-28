@@ -8,7 +8,7 @@ import org.json.JSONObject;
 // that the artist have made.
 public class Artist implements Writable {
 
-    String name;                            // stage name of the artist
+    private final String name;           // stage name of the artist
 
     // EFFECTS: creates a new artist with the given name, and two new empty ArrayLists that represents
     //          all the songs and albums that the artist may have made
@@ -20,6 +20,7 @@ public class Artist implements Writable {
         return name;
     }
 
+    // EFFECTS: creates a JSON representation of an Artist object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

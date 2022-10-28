@@ -9,7 +9,10 @@
             {
               "name": "Dua Lipa"
             },
-          "filePath": "test-stub1"
+          "filePath": "test-stub1",
+          "featuredArtists":[{
+            "name": "Hello"
+          }]
         },
         {
           "title": "Legends Never Die",
@@ -17,7 +20,8 @@
             {
               "name": "Riot Games"
             },
-          "filePath": "test-stub2"
+          "filePath": "test-stub2",
+          "featuredArtists":[]
         }
       ]
     }

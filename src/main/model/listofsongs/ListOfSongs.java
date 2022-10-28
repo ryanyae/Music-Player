@@ -44,6 +44,7 @@ public abstract class ListOfSongs implements Writable {
         return songsInAlbum.get(i);
     }
 
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: will convert a given ListOfSongs into a JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -52,11 +53,12 @@ public abstract class ListOfSongs implements Writable {
         return json;
     }
 
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: will convert songsInAlbum into a JSONArray
     private JSONArray playablesToJson() {
         JSONArray jsonArray = new JSONArray();
-        for (Song p:songsInAlbum) {
-            jsonArray.put(p.toJson());
+        for (Song s:songsInAlbum) {
+            jsonArray.put(s.toJson());
         }
         return jsonArray;
     }

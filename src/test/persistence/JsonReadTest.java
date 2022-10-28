@@ -47,6 +47,10 @@ public class JsonReadTest {
                     listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(0).getFilePath());
             assertEquals("Future Nostalgia",
                     listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(0).getTitle());
+            assertEquals(1,
+                    listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(0).getFeatures().size());
+            assertEquals("Hello",
+                    listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(0).getFeatures().get(0).getName());
 
 
             assertEquals("Riot Games",
@@ -55,6 +59,8 @@ public class JsonReadTest {
                     listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(1).getFilePath());
             assertEquals("Legends Never Die",
                     listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(1).getTitle());
+            assertEquals(0,
+                    listOfPlaylists.getPlaylistByIndex(0).getSongByIndex(1).getFeatures().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a reader that reads ListOfPlaylists from JSON data stored in file
 public class JsonRead {
     private String source;
@@ -69,13 +71,17 @@ public class JsonRead {
 
         String songTitle = p.getString("title");
         JSONObject songMaker = p.getJSONObject("maker");
+        JSONArray featuredList = p.getJSONArray("featuredArtists");
         String songFilePath = p.getString("filePath");
 
-
         Artist a = new Artist(songMaker.getString("name"));
+        Song s = new Song(a, songTitle, songFilePath);
+        playlist.addToListOfSongs(s);
 
-        playlist.addToListOfSongs(new Song(a, songTitle,
-                songFilePath));
+        for (Object json:featuredList) {
+            JSONObject nextArtist = (JSONObject) json;
+            s.addFeature(new Artist(nextArtist.getString("name")));
+        }
 
     }
 

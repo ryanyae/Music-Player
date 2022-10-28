@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -42,11 +43,22 @@ public class Song {
         return featuredArtists;
     }
 
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: creates a JSON representation of a Song object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("title", title);
         json.put("maker", artist.toJson());
         json.put("filePath", filePath);
+        json.put("featuredArtists", featuredArtistsJson(featuredArtists));
         return json;
+    }
+
+    private JSONArray featuredArtistsJson(ArrayList<Artist> featuredArtists) {
+        JSONArray jsonArray = new JSONArray();
+        for (Artist a:featuredArtists) {
+            jsonArray.put(a.toJson());
+        }
+        return jsonArray;
     }
 }

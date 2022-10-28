@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a writer that writes a ListOfPlaylists to JSON data
 public class JsonWrite {
     private static final int TAB = 4;

@@ -12,10 +12,13 @@ public class SongState {
         this.state = State.PLAYING;
     }
 
+    // EFFECTS: will set the object's time field from the given long parameter
     public void setTimeStamp(long time) {
         this.time = time;
     }
 
+    // EFFECTS: will set the object's songState field from the given State parameter.
+    //          - state can be one of 2 values from the State enum.
     public void setSongState(State state) {
         this.state = state;
     }

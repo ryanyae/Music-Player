@@ -47,6 +47,7 @@ public class ListOfPlaylists implements Writable {
         return allPlaylists.size();
     }
 
+    // EFFECTS: returns a playlist by the index of a given integer
     public Playlist getPlaylistByIndex(int i) {
         return allPlaylists.get(i);
     }
@@ -55,12 +56,16 @@ public class ListOfPlaylists implements Writable {
         return allPlaylists;
     }
 
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: creates a JSON representation of a ListOfPlaylists
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("previousPlaylists", playlistToJson());
         return json;
     }
 
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: returns a JSONArray of the playlists of all elements in allPlaylists
     private JSONArray playlistToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Playlist p:allPlaylists) {

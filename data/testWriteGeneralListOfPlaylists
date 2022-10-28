@@ -4,7 +4,8 @@
         "playables": [{
             "filePath": "./data/Legends-Never-Die.wav",
             "maker": {"name": "Riot Games"},
-            "title": "Legends Never Die"
+            "title": "Legends Never Die",
+            "featuredArtists": []
         }]
     },
     {
@@ -13,12 +14,14 @@
             {
                 "filePath": "./data/Dua Lipa - One Kiss.wav",
                 "maker": {"name": "Dua Lipa"},
-                "title": "One Kiss"
+                "title": "One Kiss",
+                "featuredArtists": []
             },
             {
                 "filePath": "./data/Dua Lipa - Levitating.wav",
                 "maker": {"name": "Dua Lipa"},
-                "title": "Levitating"
+                "title": "Levitating",
+                "featuredArtists": [{"name": "DaBaby"}]
             }
         ]
     }

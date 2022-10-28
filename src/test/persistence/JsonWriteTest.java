@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonWriteTest {
 
@@ -63,6 +62,9 @@ public class JsonWriteTest {
             albumTest2.addToListOfSongs(songTest2);
             albumTest2.addToListOfSongs(songTest3);
 
+            Artist artistTest3 = new Artist("DaBaby");
+            songTest3.addFeature(artistTest3);
+
             Playlist testPlaylist = new Playlist("Test 1");
             testPlaylist.addToListOfSongs(songTest1);
 
@@ -89,6 +91,7 @@ public class JsonWriteTest {
                     lop.getPlaylistByIndex(0).getSongByIndex(0).getArtist().getName());
             assertEquals("Legends Never Die",
                     lop.getPlaylistByIndex(0).getSongByIndex(0).getTitle());
+            assertEquals(lop.getPlaylistByIndex(1).getSongByIndex(0).getFeatures().size(), 0);
 
             assertEquals("Test 2", lop.getPlaylistByIndex(1).getPlaylistTitle());
             assertEquals("./data/Dua Lipa - One Kiss.wav",
@@ -103,6 +106,8 @@ public class JsonWriteTest {
                     lop.getPlaylistByIndex(1).getSongByIndex(1).getArtist().getName());
             assertEquals("Levitating",
                     lop.getPlaylistByIndex(1).getSongByIndex(1).getTitle());
+            assertEquals(lop.getPlaylistByIndex(1).getSongByIndex(1).getFeatures().size(), 1);
+            assertEquals(lop.getPlaylistByIndex(1).getSongByIndex(1).getFeatures().get(0).getName(), "DaBaby");
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
