@@ -3,6 +3,8 @@ package ui;
 import model.Album;
 import model.Artist;
 import model.ListOfPlaylists;
+import model.exceptions.PlaylistAlreadyExistsException;
+import model.exceptions.SongNotFoundException;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
@@ -159,7 +161,7 @@ public class MusicApp {
                 printPlaylistsMenu();
                 break;
             case "c":
-                createPlaylistMenu();
+                processCreatePlaylistMenu();
                 break;
             case "d":
                 deletePlaylistMenu();
@@ -326,17 +328,24 @@ public class MusicApp {
         playSong(playlist.getSongByIndex(Integer.parseInt(userInput) - 1));
     }
 
+    private void processCreatePlaylistMenu() {
+        try {
+            createPlaylistMenu();
+        } catch (PlaylistAlreadyExistsException e) {
+            System.out.println("\n"
+                    + "Could not make new playlist because a playlist with the given name already exists!" + "\n");
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: menu for creating a new playlist with a given name by the user
     //          - if the playlist already exists in the user's master list of playlist than an
     //            error will be handled by a message asking them to try again
-    private void createPlaylistMenu() {
+    private void createPlaylistMenu() throws PlaylistAlreadyExistsException {
         System.out.println("Enter desired playlist name:");
         String createPlaylistInput = input.next();
         if (currentPlayLists.inAllPlaylist(createPlaylistInput)) {
-            System.out.println("-------------------------------------------------------------------------------------"
-                    + "\n ERROR: Playlist with this title already exists, try again :("
-                    + "\n ------------------------------------------------------------");
+            throw new PlaylistAlreadyExistsException();
         } else {
             this.currentPlayLists.addNewPlaylist(new Playlist(createPlaylistInput));
             System.out.println("-------------------------------------------------------------------------------------"
@@ -453,6 +462,9 @@ public class MusicApp {
                             + "\n -------------------------");
                     keepAlive = false;
                 }
+            } catch (PlaylistAlreadyExistsException e) {
+                System.out.println("\n"
+                        + "Could not make new playlist because a playlist with the given name already exists!" + "\n");
             } catch (Exception error) {
                 System.out.println("Could not add song to playlist, try again!");
                 keepAlive = false;
@@ -518,6 +530,9 @@ public class MusicApp {
     // EFFECTS: will save currentPlaylists to a JSON file that is readily readable
     public void savePlaylist() {
         try {
+            if (currentPlayLists.getLength() == 0) {
+                throw new Exception("No playlists to save");
+            }
             jsonWriter.open();
             jsonWriter.write(currentPlayLists);
             jsonWriter.close();
@@ -525,6 +540,8 @@ public class MusicApp {
                     + "\n");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to read from file: " + JSON_PERSISTENCE);
+        } catch (Exception e) {
+            System.out.println("\n" + e.getMessage() + "\n");
         }
     }
 
