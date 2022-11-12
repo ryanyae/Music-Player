@@ -2,8 +2,8 @@ package model.persistence;
 
 import model.Artist;
 import model.ListOfPlaylists;
-import model.listofsongs.Playlist;
 import model.Song;
+import model.listofsongs.Playlist;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a reader that reads ListOfPlaylists from JSON data stored in file
 public class JsonRead {
-    private String source;
+    protected String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonRead(String source) {

@@ -3,12 +3,11 @@ package ui;
 import model.Album;
 import model.Artist;
 import model.ListOfPlaylists;
+import model.Song;
 import model.exceptions.PlaylistAlreadyExistsException;
-import model.exceptions.SongNotFoundException;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
-import model.Song;
 import model.songstate.SongState;
 import model.songstate.State;
 
@@ -112,7 +111,6 @@ public class MusicApp {
         legendsAlbum = new Album(riotGames, "New Season Album");
         legendsAlbum.addToListOfSongs(awakenLeagueSong);
         legendsAlbum.addToListOfSongs(legendsNeverDieSong);
-//        riotGames.newAlbumsMade(legendsAlbum);
 
         duaLipaOneKiss = new Song(duaLipa,
                 "One Kiss", "./data/Dua Lipa - One Kiss.wav");
@@ -125,7 +123,6 @@ public class MusicApp {
         duaLipaAlbum.addToListOfSongs(duaLipaOneKiss);
         duaLipaAlbum.addToListOfSongs(duaLipaLevitating);
         duaLipaAlbum.addToListOfSongs(duaLipaFutureNostalgia);
-//        duaLipa.newAlbumsMade(duaLipaAlbum);
         allSongs = new ArrayList<>(Arrays.asList(legendsNeverDieSong, awakenLeagueSong,
                 duaLipaOneKiss, duaLipaLevitating, duaLipaFutureNostalgia));
     }
@@ -549,7 +546,6 @@ public class MusicApp {
     // EFFECTS: will load all previous playlists to current playlists, and add it on top of already existing playlists
     public void loadPreviousPlaylists() {
         try {
-            // currentPlaylists = jsonReader.read()
             ArrayList<Playlist> loadingPlaylists = jsonReader.read().getAllPlaylists();
 
             for (Playlist p:loadingPlaylists) {
