@@ -1,2 +1,9 @@
-{"previousPlaylists": [
-]}
+{"previousPlaylists": [{
+    "title": "123",
+    "playables": [{
+        "filePath": "./data/Legends-Never-Die.wav",
+        "maker": {"name": "Riot Games"},
+        "title": "Legends Never Die",
+        "featuredArtists": []
+    }]
+}]}
