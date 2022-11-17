@@ -27,8 +27,6 @@ public class PlaylistMenuGUI {
         JButton createPlaylistButton = new JButton("create playlist");
         JButton backButton = new JButton("back");
 
-//        mainFrame.setVisible(false);
-
         ActionListener createPlaylistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

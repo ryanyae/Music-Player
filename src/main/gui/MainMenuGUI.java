@@ -34,12 +34,9 @@ public class MainMenuGUI {
     static Album duaLipaAlbum;
     static Artist daBaby = new Artist("Da Baby");
 
-    private static final String[] songs = {"Legends Never Die - Riot Games", "Awaken - Riot Games",
-            "One Kiss - Dua Lipa", "Levitating - Dua Lipa", "Future Nostalgia - Dua Lipa ft.DaBaby"};
 
     private static ArrayList<Song> allSongs;
 
-    private JList jofAllSongs = new JList(songs);
 
     private static ListOfPlaylists currentPlaylists;
 
@@ -48,6 +45,7 @@ public class MainMenuGUI {
     JFrame frame3; // song library menu frame
 
     PlaylistMenuGUI playlistMenuObj;
+    BrowseSongMenuGUI browseSongMenuObj;
 
     @SuppressWarnings("methodlength")
     public MainMenuGUI() {
@@ -55,7 +53,12 @@ public class MainMenuGUI {
         frame2 = new JFrame();
         frame3 = new JFrame();
 
+        frame.setResizable(false);
+        frame2.setResizable(false);
+        frame3.setResizable(false);
+
         playlistMenuObj = new PlaylistMenuGUI(frame, frame2, currentPlaylists);
+        browseSongMenuObj = new BrowseSongMenuGUI(frame, frame3, allSongs);
 
         JButton playlistViewButton = new JButton("view all your playlists");
         JButton browseSongLibrary = new JButton("browse our song library");
@@ -90,7 +93,7 @@ public class MainMenuGUI {
             public void actionPerformed(ActionEvent ae) {
                 System.out.println("browse songs...");
                 frame.setVisible(false);
-                browseSongMenu();
+                browseSongMenuObj.setFrameVisible(true);
             }
         };
 
@@ -99,7 +102,6 @@ public class MainMenuGUI {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 System.out.println("save playlists...");
-
             }
         };
 
@@ -145,62 +147,6 @@ public class MainMenuGUI {
 
         allSongs = new ArrayList<>(Arrays.asList(legendsNeverDieSong, awakenLeagueSong,
                 duaLipaOneKiss, duaLipaLevitating, duaLipaFutureNostalgia));
-    }
-
-    private void playSong(Song playable) {
-        File musicFile = new File(playable.getFilePath());
-        System.out.println("Now playing " + playable.getTitle() + " by " + playable.getArtist().getName());
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicFile);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-
-             // songMenu(clip, playable);
-        } catch (Exception error) {
-            System.out.println("Could not play this song, try again");
-        }
-    }
-
-    @SuppressWarnings("methodlength")
-    private void browseSongMenu() {
-        frame3.setSize(300,200);
-        JPanel mainPanel = new JPanel();
-        JPanel topPanel = new JPanel();
-        JPanel buttonPanel = new JPanel();
-        JButton backButton = new JButton("back");
-
-        buttonPanel.add(backButton);
-        topPanel.add(jofAllSongs);
-
-        mainPanel.add(topPanel);
-        mainPanel.add(buttonPanel);
-
-        frame3.add(mainPanel);
-
-        frame3.setVisible(true);
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame3.setVisible(false);
-                frame.setVisible(true);
-            }
-        });
-
-        // https://stackoverflow.com/questions/4344682/double-click-event-on-jlist-element
-        jofAllSongs.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JList list = jofAllSongs;
-
-                if (e.getClickCount() >= 2) {
-                    int index = list.locationToIndex(e.getPoint());
-                    System.out.println(index);
-                    System.out.println(songs[index]);
-                }
-            }
-        });
     }
 
     public static void main(String[] args) {
