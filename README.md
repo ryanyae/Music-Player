@@ -24,7 +24,7 @@ able to expand my grasp on software engineering and make something other than a 
 ### ***Instructions for the Grader***
 
 - you can generate the first required event related to adding X's to a Y by making new playlists through the "view all
-playlists button"
+playlists button", you are allowed to make multiple playlists and with the choice of naming them as well
 - you can generate the second required event related to adding X's to a Y by adding a song through the "browse our song
     library" button and adding a song to an existing playlist
 - you can locate my visual component by listening to a song from an existing playlist with songs inside or
