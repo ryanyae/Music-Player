@@ -22,7 +22,8 @@ public class SongTest {
 
         Artist artistTest2 = new Artist("Dua Lipa");
         Song songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
-        songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav");
+        songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav",
+                "stub");
         Album albumTest2 = new Album(artistTest2, "Future Nostalgia");
         albumTest2.addToListOfSongs(songTest2);
         albumTest2.addToListOfSongs(songTest3);

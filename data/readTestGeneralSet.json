@@ -10,6 +10,7 @@
               "name": "Dua Lipa"
             },
           "filePath": "test-stub1",
+          "imagePath": "test-stub1",
           "featuredArtists":[{
             "name": "Hello"
           }]
@@ -21,6 +22,7 @@
               "name": "Riot Games"
             },
           "filePath": "test-stub2",
+          "imagePath": "test-stub1",
           "featuredArtists":[]
         }
       ]

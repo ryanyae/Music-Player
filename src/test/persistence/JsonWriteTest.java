@@ -51,13 +51,16 @@ public class JsonWriteTest {
             ListOfPlaylists lop = new ListOfPlaylists();
 
             Artist artistTest1 = new Artist("Riot Games");
-            Song songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav");
+            Song songTest1 = new Song(artistTest1, "Legends Never Die", "./data/Legends-Never-Die.wav",
+                    "stub");
             Album albumTest1 = new Album(artistTest1, "Legends Album");
             albumTest1.addToListOfSongs(songTest1);
 
             Artist artistTest2 = new Artist("Dua Lipa");
-            Song songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav");
-            Song songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav");
+            Song songTest2 = new Song(artistTest2, "One Kiss", "./data/Dua Lipa - One Kiss.wav",
+                    "stub");
+            Song songTest3 = new Song(artistTest2, "Levitating", "./data/Dua Lipa - Levitating.wav",
+                    "stub");
 
             Album albumTest2 = new Album(artistTest2, "Future Nostalgia");
             albumTest2.addToListOfSongs(songTest2);
