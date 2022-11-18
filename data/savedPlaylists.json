@@ -1,9 +1,40 @@
-{"previousPlaylists": [{
-    "title": "123",
-    "playables": [{
-        "filePath": "./data/Legends-Never-Die.wav",
-        "maker": {"name": "Riot Games"},
-        "title": "Legends Never Die",
-        "featuredArtists": []
-    }]
-}]}
+{"previousPlaylists": [
+    {
+        "title": "1234",
+        "playables": [
+            {
+                "imagePath": "./data/futureNostalgiaCoverArt.jpg",
+                "filePath": "./data/Dua Lipa - Future Nostalgia.wav",
+                "maker": {"name": "Dua Lipa"},
+                "title": "Future Nostalgia",
+                "featuredArtists": []
+            },
+            {
+                "imagePath": "./data/awakenCoverArt.jpg",
+                "filePath": "./data/League Of Legends - Awaken.wav",
+                "maker": {"name": "Riot Games"},
+                "title": "Awaken",
+                "featuredArtists": []
+            }
+        ]
+    },
+    {
+        "title": "123",
+        "playables": [
+            {
+                "imagePath": "./data/oneKissCoverArt.jpeg",
+                "filePath": "./data/Dua Lipa - One Kiss.wav",
+                "maker": {"name": "Dua Lipa"},
+                "title": "One Kiss",
+                "featuredArtists": []
+            },
+            {
+                "imagePath": "./data/legendsNeverDieCoverArt.jpeg",
+                "filePath": "./data/Legends-Never-Die.wav",
+                "maker": {"name": "Riot Games"},
+                "title": "Legends Never Die",
+                "featuredArtists": []
+            }
+        ]
+    }
+]}

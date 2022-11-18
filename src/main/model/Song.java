@@ -11,6 +11,7 @@ public class Song {
     protected Artist artist;                       // artist that made this playable
     protected String filePath;                     // file address of the playable in the project
     protected ArrayList<Artist> featuredArtists;   // list of artist that maybe features on the playable
+    protected String imagePath;
 
     // REQUIRES: title length to of non-zero length and the playable's .wav file must exist in the resources folder
     // EFFECTS: instantiates a new Playable object with a given title, artist, filePath and an
@@ -21,6 +22,14 @@ public class Song {
         this.artist = artist;
         this.filePath = filePath;
         featuredArtists = new ArrayList<>();
+    }
+
+    public Song(Artist artist, String title, String filePath, String imagePath) {
+        this.title = title;
+        this.artist = artist;
+        this.filePath = filePath;
+        featuredArtists = new ArrayList<>();
+        this.imagePath = imagePath;
     }
 
     public Artist getArtist() {
@@ -50,6 +59,7 @@ public class Song {
         json.put("title", title);
         json.put("maker", artist.toJson());
         json.put("filePath", filePath);
+        json.put("imagePath", imagePath);
         json.put("featuredArtists", featuredArtistsJson(featuredArtists));
         return json;
     }
@@ -60,5 +70,9 @@ public class Song {
             jsonArray.put(a.toJson());
         }
         return jsonArray;
+    }
+
+    public String getImagePath() {
+        return this.imagePath;
     }
 }

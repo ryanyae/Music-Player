@@ -72,9 +72,10 @@ public class JsonRead {
         JSONObject songMaker = p.getJSONObject("maker");
         JSONArray featuredList = p.getJSONArray("featuredArtists");
         String songFilePath = p.getString("filePath");
+        String songImagePath = p.getString("imagePath");
 
         Artist a = new Artist(songMaker.getString("name"));
-        Song s = new Song(a, songTitle, songFilePath);
+        Song s = new Song(a, songTitle, songFilePath, songImagePath);
         playlist.addToListOfSongs(s);
 
         for (Object json:featuredList) {
