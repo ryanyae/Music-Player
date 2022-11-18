@@ -20,3 +20,14 @@ able to expand my grasp on software engineering and make something other than a 
 * As a user I want to be able to delete some playlists.
 * As a user I want to be able to save previous playlists
 * As a user I want to be given the option to reload my previous playlists
+
+### ***Instructions for the Grader***
+
+- you can generate the first required event related to adding X's to a Y by making new playlists through the "view all
+playlists button"
+- you can generate the second required event related to adding X's to a Y by adding a song through the "browse our song
+    library" button and adding a song to an existing playlist
+- you can locate my visual component by listening to a song from an existing playlist with songs inside or
+listening to a song through the "browse our song library" and seeing the unique cover arts of each song.
+- you can save the state of my application by clicking the "save all playlists" button
+- you can reload the state of my application by clicking the "load previous playlists" button

@@ -89,7 +89,7 @@ public class MainMenuGUI {
         ActionListener playlistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("browse songs...");
+                System.out.println("browse playlists...");
                 frame.setVisible(false);
                 playlistMenuObj.setFrameVisible(true);
             }
@@ -167,10 +167,11 @@ public class MainMenuGUI {
     public void loadPreviousPlaylists() {
         try {
             ArrayList<Playlist> loadingPlaylists = jsonReader.read().getAllPlaylists();
-
             for (Playlist p:loadingPlaylists) {
                 currentPlaylists.addNewPlaylist(p);
             }
+            playlistMenuObj.getTopPanel().remove(0);
+            playlistMenuObj.updateVisiblePlaylists();
             System.out.println("\n" + "Loaded all playlists from " + JSON_PERSISTENCE
                     + "\n");
         } catch (IOException e) {

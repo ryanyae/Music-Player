@@ -39,7 +39,7 @@ public class PlaylistMenuGUI {
         JButton createPlaylistButton = new JButton("create playlist");
         JButton backButton = new JButton("back");
         mainFrame.setLocationRelativeTo(null);
-        updateVisiblePlaylists(topPanel);
+        updateVisiblePlaylists();
         ActionListener createPlaylistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,7 +73,7 @@ public class PlaylistMenuGUI {
         mainFrame.setVisible(false);
 
         topPanel.remove(0);
-        updateVisiblePlaylists(topPanel);
+        updateVisiblePlaylists();
     }
 
     @SuppressWarnings("methodlength")
@@ -103,7 +103,7 @@ public class PlaylistMenuGUI {
             public void actionPerformed(ActionEvent e) {
                 currentPlaylists.addNewPlaylist(new Playlist(titleInput.getText()));
                 topPanel.remove(0);
-                updateVisiblePlaylists(topPanel);
+                updateVisiblePlaylists();
                 createPlaylistFrame.setVisible(false);
                 mainFrame.setVisible(true);
             }
@@ -113,7 +113,7 @@ public class PlaylistMenuGUI {
             public void actionPerformed(ActionEvent e) {
                 createPlaylistFrame.setVisible(false);
                 topPanel.remove(0);
-                updateVisiblePlaylists(topPanel);
+                updateVisiblePlaylists();
                 mainFrame.setVisible(true);
             }
         };
@@ -123,14 +123,14 @@ public class PlaylistMenuGUI {
 
     }
 
-    private void updateVisiblePlaylists(JPanel panel) {
+    public void updateVisiblePlaylists() {
         if (currentPlaylists.getLength() <= 0) {
             JLabel noPlaylistLabel = new JLabel("No Playlists to display");
-            panel.add(noPlaylistLabel);
+            topPanel.add(noPlaylistLabel);
         } else {
             JList jofCurrentPlaylists = new JList(printPlaylists().toArray());
             jofCurrentPlaylists.setVisibleRowCount(3);
-            panel.add(jofCurrentPlaylists);
+            topPanel.add(jofCurrentPlaylists);
             jofCurrentPlaylists.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -292,6 +292,10 @@ public class PlaylistMenuGUI {
                 pauseButton.setEnabled(false);
             }
         });
+    }
+
+    public JPanel getTopPanel() {
+        return topPanel;
     }
 
     public void setFrameVisible(boolean b) {
