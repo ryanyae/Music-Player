@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 // https://www.youtube.com/watch?v=5o3fMLPY7qY&ab_channel=AlexLee
+// represents the main menu that the user first sees and lastly sees
 public class MainMenuGUI {
     static Artist riotGames = new Artist("Riot Games");
     static Song legendsNeverDieSong;
@@ -41,19 +42,23 @@ public class MainMenuGUI {
     private static JsonWrite jsonWriter;
     private static JsonRead jsonReader;
 
-
     private static ArrayList<Song> allSongs;
-
 
     private static ListOfPlaylists currentPlaylists;
 
-    JFrame frame; // main menu frame
-    JFrame frame2; // playlist menu frame
+    // JFrame that is reserved for the main menu
+    JFrame frame;
+
+    // JFrame that is reserved for the playlist menu
+    JFrame frame2;
+
+    // JFrame that is reserved for the song library
     JFrame frame3; // song library menu frame
 
     PlaylistMenuGUI playlistMenuObj;
     BrowseSongMenuGUI browseSongMenuObj;
 
+    // object that started the entire program
     @SuppressWarnings("methodlength")
     public MainMenuGUI() {
         frame = new JFrame();
@@ -86,6 +91,8 @@ public class MainMenuGUI {
         frame.setVisible(true);
 
         // https://www.youtube.com/watch?v=2lZqRZPgfQ4&ab_channel=choobtorials
+        // MODIFIES: this
+        // EFFECTS: takes you to the frame that represents the playlist menu
         ActionListener playlistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -96,6 +103,8 @@ public class MainMenuGUI {
         };
 
         //https://www.youtube.com/watch?v=2lZqRZPgfQ4&ab_channel=choobtorials
+        // MODIFIES: this
+        // EFFECTS: takes you to the frame that represents the song library menu
         ActionListener browseSongAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -106,6 +115,8 @@ public class MainMenuGUI {
         };
 
         //https://www.youtube.com/watch?v=2lZqRZPgfQ4&ab_channel=choobtorials
+        // MODIFIES: this
+        // EFFECTS: saves all playlists that have been made into a JSON file in the data folder in this project
         ActionListener savePlaylistAciton = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -115,6 +126,8 @@ public class MainMenuGUI {
         };
 
         //https://www.youtube.com/watch?v=2lZqRZPgfQ4&ab_channel=choobtorials
+        // MODIFIES: this
+        // EFFECTS: loads all playlists that are in a JSON file into this.currentPlaylists
         ActionListener loadPlaylistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -131,6 +144,8 @@ public class MainMenuGUI {
     }
 
     @SuppressWarnings("methodlength")
+    // MODIFIES: this
+    // EFFECTS: initializes all the songs that are in the data folder
     private static void initializeAllSongs() {
 
         legendsNeverDieSong = new Song(riotGames,

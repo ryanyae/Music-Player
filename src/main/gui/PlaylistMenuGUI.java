@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 
+// Represents the menu that the user sees to interact with playlists that they have made
 public class PlaylistMenuGUI {
 
     JFrame mainFrame;
@@ -29,6 +30,8 @@ public class PlaylistMenuGUI {
     Clip clip;
     SongState songState;
 
+    // MODIFIES: this
+    // EFFECTS: instantiates all fields and creates the main frame in which the user interacts with to make playlists
     @SuppressWarnings("methodlength")
     public PlaylistMenuGUI(JFrame frame, JFrame frame2, ListOfPlaylists currentPlaylists) {
         this.mainFrame = frame2;
@@ -76,6 +79,12 @@ public class PlaylistMenuGUI {
         updateVisiblePlaylists();
     }
 
+    // MODIFIES: this
+    // EFFECTS: the menu that the user will see when trying to create a new playlist
+    //          - has a text field for the user's desired title for a playlist
+    //          - back buttons for the user to be able to leave this menu and back to the main playlist menu
+    //          - create button that will create a new playlist that is empty with a title given by the previous text
+    //            field
     @SuppressWarnings("methodlength")
     private void createPlaylistActionMenu() {
         System.out.println("create Playlist...");
@@ -123,6 +132,10 @@ public class PlaylistMenuGUI {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates the panel that displays playlists in the main playlist menu
+    //          - if there are no currentPlaylists than displays "No playlist to display"
+    //          - else creates a JList of all playlists in currentPlaylists
     public void updateVisiblePlaylists() {
         if (currentPlaylists.getLength() <= 0) {
             JLabel noPlaylistLabel = new JLabel("No Playlists to display");
@@ -146,6 +159,9 @@ public class PlaylistMenuGUI {
         }
     }
 
+    // EFFECTS: will create a frame that is the menu for only a single playlist
+    //          - able to play music from here
+    //          - back buttons takes user back to the main playlists menu
     @SuppressWarnings("methodlength")
     private void menuForPlaylist(Playlist playlistByIndex) {
         JFrame singlePlaylistMenu = new JFrame(playlistByIndex.getPlaylistTitle());
@@ -191,6 +207,7 @@ public class PlaylistMenuGUI {
         singlePlaylistMenu.setVisible(true);
     }
 
+    // EFFECTS: will return a list of strings that represent the title of the songs inside a given playlist
     private ArrayList<String> printLOS(ArrayList<Song> songs) {
         ArrayList<String> dummyList = new ArrayList<>();
         for (Song s:songs) {
@@ -199,6 +216,7 @@ public class PlaylistMenuGUI {
         return dummyList;
     }
 
+    // EFFECTS: will return a list of strings that represent the title of the playlists from currentPlaylists
     private ArrayList<String> printPlaylists() {
         ArrayList<String> currentPlaylistNames = new ArrayList<>();
 
@@ -209,6 +227,8 @@ public class PlaylistMenuGUI {
         return currentPlaylistNames;
     }
 
+    // MODIFIES: this
+    // EFFECTS: will play the chosen song
     private void playSong(Song playable) {
         File musicFile = new File(playable.getFilePath());
         System.out.println("Now playing " + playable.getTitle() + " by " + playable.getArtist().getName());
@@ -222,6 +242,9 @@ public class PlaylistMenuGUI {
         }
     }
 
+    // EFFECTS: the menu that the user will see when playing a song through a playlist
+    //          - consists of buttons that allow the user to pause, resume, add to a playlist or back out this screen
+    //            and go back to the main browse song menu.
     private void playSongFrame(JFrame frame, int index, Playlist p) {
         JFrame playSongFrame = new JFrame();
         JPanel songMainPanel = new JPanel();
@@ -239,6 +262,9 @@ public class PlaylistMenuGUI {
         playSongFrame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds to a given JPanel that is the title and contents of the song
+    //          - will also attach an image which is the song's cover art
     private void songTitlePanel(JPanel songMainPanel, JPanel titlePanel, Song song) {
         JLabel titleLabel = new JLabel();
         JLabel image = new JLabel(new ImageIcon(song.getImagePath()));
@@ -250,6 +276,13 @@ public class PlaylistMenuGUI {
     }
 
     @SuppressWarnings("methodlength")
+    // MODIFIES: this
+    // EFFECTS: adds to a given JPanel all buttons necessary to interact with the song while it is playing
+    //          - the back button will take the user back to the main browse song menu,
+    //          - the pause button will pause the music, and will only be able to pressed while the
+    //            song.getSongState == SongState.PLAYING
+    //          - the play button will resume the music, and will only be able to pressed while the
+    //            song.getSongState == SongState.PAUSED
     private void songButtonPanel(JFrame frame, JFrame frame2, JPanel songMainPanel, JPanel buttonPanel, Song song) {
         songState = new SongState();
         JButton backButton = new JButton("back");
@@ -294,10 +327,13 @@ public class PlaylistMenuGUI {
         });
     }
 
+    // EFFECTS: returns the topPanel
     public JPanel getTopPanel() {
         return topPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the mainFrame's visibility with the given boolean
     public void setFrameVisible(boolean b) {
         mainFrame.setVisible(b);
     }
