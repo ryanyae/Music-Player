@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 // Represents a writer that writes a ListOfPlaylists to JSON data
 public class JsonWrite {
     private static final int TAB = 4;
-
     private PrintWriter writer;
     private String destination;
 
