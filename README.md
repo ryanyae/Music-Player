@@ -2,7 +2,6 @@
 ## Being able to play music
 
 
-
 ### **TASK 2**
 
 My project will be of a **music playing application**. Range of people will be able to use my application ranging 
@@ -31,3 +30,4 @@ playlists button", you are allowed to make multiple playlists and with the choic
 listening to a song through the "browse our song library" and seeing the unique cover arts of each song.
 - you can save the state of my application by clicking the "save all playlists" button
 - you can reload the state of my application by clicking the "load previous playlists" button
+- **when double-clicking on a song to play be careful as multiple instances of the same song can play**
