@@ -1,1 +1,25 @@
-{"previousPlaylists": []}
+{"previousPlaylists": [
+    {
+        "title": "abc",
+        "playables": [
+            {
+                "imagePath": "./data/duaLipaLevitatingCoverArt.png",
+                "filePath": "./data/Dua Lipa - Levitating.wav",
+                "maker": {"name": "Dua Lipa"},
+                "title": "Levitating",
+                "featuredArtists": [{"name": "Da Baby"}]
+            },
+            {
+                "imagePath": "./data/oneKissCoverArt.jpeg",
+                "filePath": "./data/Dua Lipa - One Kiss.wav",
+                "maker": {"name": "Dua Lipa"},
+                "title": "One Kiss",
+                "featuredArtists": []
+            }
+        ]
+    },
+    {
+        "title": "123",
+        "playables": []
+    }
+]}

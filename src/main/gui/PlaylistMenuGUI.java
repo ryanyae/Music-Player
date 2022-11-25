@@ -231,7 +231,6 @@ public class PlaylistMenuGUI {
     // EFFECTS: will play the chosen song
     private void playSong(Song playable) {
         File musicFile = new File(playable.getFilePath());
-        System.out.println("Now playing " + playable.getTitle() + " by " + playable.getArtist().getName());
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicFile);
             clip = AudioSystem.getClip();

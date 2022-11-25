@@ -21,6 +21,8 @@ public class ListOfPlaylists implements Writable {
     // EFFECTS: adds new Playlist to the allPlaylists
     public void addNewPlaylist(Playlist playlist) {
         allPlaylists.add(playlist);
+        EventLog.getInstance().logEvent(new Event("Created new playlist named: "
+                + playlist.getPlaylistTitle()));
     }
 
     // MODIFIES: this

@@ -1,9 +1,6 @@
 package gui;
 
-import model.Album;
-import model.Artist;
-import model.ListOfPlaylists;
-import model.Song;
+import model.*;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
@@ -77,6 +74,7 @@ public class MainMenuGUI {
         JButton browseSongLibrary = new JButton("browse our song library");
         JButton savePlaylists = new JButton("save all your playlists");
         JButton loadPreviousPlaylists = new JButton("load your previous playlists");
+        JButton quitButton = new JButton("quit");
 
         GridLayout layout = new GridLayout(0, 2);
 
@@ -85,6 +83,7 @@ public class MainMenuGUI {
         frame.add(browseSongLibrary);
         frame.add(savePlaylists);
         frame.add(loadPreviousPlaylists);
+        frame.add(quitButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(450, 200);
@@ -96,7 +95,6 @@ public class MainMenuGUI {
         ActionListener playlistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("browse playlists...");
                 frame.setVisible(false);
                 playlistMenuObj.setFrameVisible(true);
             }
@@ -108,7 +106,6 @@ public class MainMenuGUI {
         ActionListener browseSongAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("browse songs...");
                 frame.setVisible(false);
                 browseSongMenuObj.setFrameVisible(true);
             }
@@ -120,7 +117,6 @@ public class MainMenuGUI {
         ActionListener savePlaylistAciton = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("save playlists...");
                 savePlaylist();
             }
         };
@@ -131,8 +127,19 @@ public class MainMenuGUI {
         ActionListener loadPlaylistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("loading playlists...");
                 loadPreviousPlaylists();
+            }
+        };
+
+        //https://stackoverflow.com/questions/8632705/how-to-close-a-gui-when-i-push-a-jbutton
+        // MODFIIES: this
+        // EFFECTS: will close the entire program
+        ActionListener quitAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LogPrinter lp = new LogPrinter();
+                lp.printLog(EventLog.getInstance());
+                System.exit(0);
             }
         };
 
@@ -141,6 +148,7 @@ public class MainMenuGUI {
         browseSongLibrary.addActionListener(browseSongAction);
         savePlaylists.addActionListener(savePlaylistAciton);
         loadPreviousPlaylists.addActionListener(loadPlaylistAction);
+        quitButton.addActionListener(quitAction);
     }
 
     @SuppressWarnings("methodlength")

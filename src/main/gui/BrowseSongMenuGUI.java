@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 // Represents the frame that the user sees to interact with songs within our library
 public class BrowseSongMenuGUI {
 
@@ -250,14 +252,13 @@ public class BrowseSongMenuGUI {
     // EFFECTS: plays any given song with audio
     private void playSong(Song playable) {
         File musicFile = new File(playable.getFilePath());
-        System.out.println("Now playing " + playable.getTitle() + " by " + playable.getArtist().getName());
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicFile);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
         } catch (Exception error) {
-            System.out.println("Could not play this song, try again");
+            showMessageDialog(null, "Could not play this song, try again");
         }
     }
 

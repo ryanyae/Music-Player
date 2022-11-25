@@ -1,5 +1,7 @@
 package model.listofsongs;
 
+import model.Event;
+import model.EventLog;
 import model.persistence.Writable;
 import model.Song;
 import org.json.JSONArray;
@@ -37,6 +39,8 @@ public abstract class ListOfSongs implements Writable {
     // EFFECTS: adds given song songsInAlbum
     public void addToListOfSongs(Song playable) {
         songsInAlbum.add(playable);
+        EventLog.getInstance().logEvent(new Event("Added song " + "(" + playable.getTitle() + " by "
+                + playable.getArtist().getName() + ")" + " to " + this.title));
     }
 
     // EFFECTS: with a given integer, this method will return a song at the given index
