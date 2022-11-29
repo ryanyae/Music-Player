@@ -1,9 +1,11 @@
-import model.*;
+import model.Artist;
+import model.Event;
+import model.EventLog;
+import model.Song;
 import model.listofsongs.Playlist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -16,6 +18,10 @@ public class PlaylistTest {
     private Song songTest3;
     private Playlist playlistTest1;
 
+    Event testEvent;
+    Event testEvent2;
+    Event testEvent3;
+
     @BeforeEach
     void setUp() {
         EventLog.getInstance().clear();
@@ -27,25 +33,39 @@ public class PlaylistTest {
 
         playlistTest1.addToListOfSongs(songTest1);
         playlistTest1.addToListOfSongs(songTest2);
+
+        testEvent = new Event("Event log cleared.");
+        testEvent2 = new Event("Added song (Future Nostalgia by Dua Lipa) to Playlist Test");
+        testEvent3 = new Event("Added song (Levitating by Dua Lipa) to Playlist Test");
     }
 
     @Test
     void testEventLog() {
         Iterator<Event> dummyList = EventLog.getInstance().iterator();
+        Event dummyEvent;
 
-        assertEquals(dummyList.next().getDescription(), "Event log cleared.");
-        assertTrue(EventLog.getInstance().iterator().hasNext());
-
-        dummyList.next();
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Event log cleared.");
+        assertTrue(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
         assertTrue(dummyList.hasNext());
 
-        dummyList.next();
+        dummyEvent = dummyList.next();
+        assertFalse(dummyEvent.equals(testEvent));
+        assertTrue(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
+        assertEquals(dummyEvent.getDescription(),
+                "Added song (Future Nostalgia by Dua Lipa) to Playlist Test");
+        assertTrue(dummyList.hasNext());
+
+        dummyEvent = dummyList.next();
+        assertFalse(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertTrue(dummyEvent.equals(testEvent3));
+        assertEquals(dummyEvent.getDescription(), "Added song "
+                        + "(Levitating by Dua Lipa) to Playlist Test");
         assertFalse(dummyList.hasNext());
-//        assertEquals(EventLog.getInstance().iterator().next().getDescription(),
-//                "Added song (Future Nostalgia by Dua Lipa) to Playlist Test");
-//        assertEquals(EventLog.getInstance().iterator().next().getDescription(), "Added song "
-//                + "(Levitating by Dua Lipa) to Playlist Test");
-//        assertFalse(EventLog.getInstance().iterator().hasNext());
     }
 
     // regular test that will test for deleting only 1 instance of a song

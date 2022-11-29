@@ -5,8 +5,6 @@ import model.listofsongs.Playlist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +18,12 @@ public class ListOfPlaylistTest {
     Playlist playlistTest3;
     Playlist playlistTest4;
     Playlist playlistTest5;
+
+    Event testEvent;
+    Event testEvent2;
+    Event testEvent3;
+    Event testEvent4;
+    Event testEvent5;
 
     @BeforeEach
     void setUp() {
@@ -35,6 +39,12 @@ public class ListOfPlaylistTest {
         listPlaylists.addNewPlaylist(playlistTest2);
         listPlaylists.addNewPlaylist(playlistTest3);
         listPlaylists.addNewPlaylist(playlistTest4);
+
+        testEvent = new Event("Event log cleared.");
+        testEvent2 = new Event("Created new playlist named: Playlist 1");
+        testEvent3 = new Event("Created new playlist named: Playlist 2");
+        testEvent4 = new Event("Created new playlist named: Playlist 3");
+        testEvent5 = new Event("Created new playlist named: Playlist 4");
     }
 
     @Test
@@ -68,20 +78,51 @@ public class ListOfPlaylistTest {
     @Test
     void testEventLog() {
         Iterator<Event> dummyList = EventLog.getInstance().iterator();
+        Event dummyEvent;
 
-        assertEquals(dummyList.next().getDescription(), "Event log cleared.");
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Event log cleared.");
+        assertTrue(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
+        assertFalse(dummyEvent.equals(testEvent4));
+        assertFalse(dummyEvent.equals(testEvent5));
         assertTrue(dummyList.hasNext());
 
-        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 1");
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Created new playlist named: Playlist 1");
+        assertFalse(dummyEvent.equals(testEvent));
+        assertTrue(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
+        assertFalse(dummyEvent.equals(testEvent4));
+        assertFalse(dummyEvent.equals(testEvent5));
         assertTrue(dummyList.hasNext());
 
-        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 2");
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Created new playlist named: Playlist 2");
+        assertFalse(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertTrue(dummyEvent.equals(testEvent3));
+        assertFalse(dummyEvent.equals(testEvent4));
+        assertFalse(dummyEvent.equals(testEvent5));
         assertTrue(dummyList.hasNext());
 
-        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 3");
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Created new playlist named: Playlist 3");
+        assertFalse(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
+        assertTrue(dummyEvent.equals(testEvent4));
+        assertFalse(dummyEvent.equals(testEvent5));
         assertTrue(dummyList.hasNext());
 
-        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 4");
+        dummyEvent = dummyList.next();
+        assertEquals(dummyEvent.getDescription(), "Created new playlist named: Playlist 4");
+        assertFalse(dummyEvent.equals(testEvent));
+        assertFalse(dummyEvent.equals(testEvent2));
+        assertFalse(dummyEvent.equals(testEvent3));
+        assertFalse(dummyEvent.equals(testEvent4));
+        assertTrue(dummyEvent.equals(testEvent5));
         assertFalse(dummyList.hasNext());
     }
 }
