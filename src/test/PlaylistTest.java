@@ -1,10 +1,11 @@
-import model.Artist;
-import model.Album;
+import model.*;
 import model.listofsongs.Playlist;
-import model.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +18,7 @@ public class PlaylistTest {
 
     @BeforeEach
     void setUp() {
+        EventLog.getInstance().clear();
         Artist duaLipaTest = new Artist("Dua Lipa");
         songTest1 = new Song(duaLipaTest, "Future Nostalgia", "data/Dua Lipa - Future Nostalgia.wav");
         songTest2 = new Song(duaLipaTest, "Levitating", "./data/Dua Lipa - Levitating");
@@ -25,6 +27,25 @@ public class PlaylistTest {
 
         playlistTest1.addToListOfSongs(songTest1);
         playlistTest1.addToListOfSongs(songTest2);
+    }
+
+    @Test
+    void testEventLog() {
+        Iterator<Event> dummyList = EventLog.getInstance().iterator();
+
+        assertEquals(dummyList.next().getDescription(), "Event log cleared.");
+        assertTrue(EventLog.getInstance().iterator().hasNext());
+
+        dummyList.next();
+        assertTrue(dummyList.hasNext());
+
+        dummyList.next();
+        assertFalse(dummyList.hasNext());
+//        assertEquals(EventLog.getInstance().iterator().next().getDescription(),
+//                "Added song (Future Nostalgia by Dua Lipa) to Playlist Test");
+//        assertEquals(EventLog.getInstance().iterator().next().getDescription(), "Added song "
+//                + "(Levitating by Dua Lipa) to Playlist Test");
+//        assertFalse(EventLog.getInstance().iterator().hasNext());
     }
 
     // regular test that will test for deleting only 1 instance of a song
@@ -53,8 +74,6 @@ public class PlaylistTest {
         assertEquals(playlistTest1.getListOfSongs().get(0), songTest2);
         assertEquals(playlistTest1.getListOfSongs().get(1), songTest1);
     }
-
-
 }
 
 

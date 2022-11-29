@@ -87,7 +87,6 @@ public class PlaylistMenuGUI {
     //            field
     @SuppressWarnings("methodlength")
     private void createPlaylistActionMenu() {
-        System.out.println("create Playlist...");
         JFrame createPlaylistFrame = new JFrame();
         createPlaylistFrame.setSize(200, 125);
         createPlaylistFrame.setLocationRelativeTo(null);

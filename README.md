@@ -31,3 +31,14 @@ listening to a song through the "browse our song library" and seeing the unique 
 - you can save the state of my application by clicking the "save all playlists" button
 - you can reload the state of my application by clicking the "load previous playlists" button
 - **when double-clicking on a song to play be careful as multiple instances of the same song can play**
+
+
+### PHASE 4: TASK 2
+- Sun Nov 27 17:40:27 PST 2022
+Created new playlist named: 1234
+- Sun Nov 27 17:40:34 PST 2022
+Added song (One Kiss by Dua Lipa) to 1234
+- Sun Nov 27 17:40:38 PST 2022
+Added song (Levitating by Dua Lipa) to 1234
+- Sun Nov 27 17:40:53 PST 2022
+Created new playlist named: 123

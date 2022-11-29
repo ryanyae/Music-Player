@@ -1,7 +1,13 @@
+import model.Event;
+import model.EventLog;
 import model.ListOfPlaylists;
 import model.listofsongs.Playlist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +23,7 @@ public class ListOfPlaylistTest {
 
     @BeforeEach
     void setUp() {
+        EventLog.getInstance().clear();
         listPlaylists = new ListOfPlaylists();
         playlistTest1 = new Playlist("Playlist 1");
         playlistTest2 = new Playlist("Playlist 2");
@@ -56,5 +63,25 @@ public class ListOfPlaylistTest {
         assertTrue(listPlaylists.inAllPlaylist("Playlist 3"));
         assertTrue(listPlaylists.inAllPlaylist("Playlist 4"));
         assertFalse(listPlaylists.inAllPlaylist("Playlist 5"));
+    }
+
+    @Test
+    void testEventLog() {
+        Iterator<Event> dummyList = EventLog.getInstance().iterator();
+
+        assertEquals(dummyList.next().getDescription(), "Event log cleared.");
+        assertTrue(dummyList.hasNext());
+
+        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 1");
+        assertTrue(dummyList.hasNext());
+
+        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 2");
+        assertTrue(dummyList.hasNext());
+
+        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 3");
+        assertTrue(dummyList.hasNext());
+
+        assertEquals(dummyList.next().getDescription(), "Created new playlist named: Playlist 4");
+        assertFalse(dummyList.hasNext());
     }
 }

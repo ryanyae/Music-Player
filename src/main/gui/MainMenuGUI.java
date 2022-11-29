@@ -43,6 +43,7 @@ public class MainMenuGUI {
 
     private static ListOfPlaylists currentPlaylists;
 
+
     // JFrame that is reserved for the main menu
     JFrame frame;
 
