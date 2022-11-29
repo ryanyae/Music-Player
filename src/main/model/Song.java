@@ -1,12 +1,13 @@
 package model;
 
+import model.persistence.Writable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 // Represents an object that is playable, meaning it can be played using a method
-public class Song {
+public class Song implements Writable {
     protected String title;                        // title of the playable
     protected Artist artist;                       // artist that made this playable
     protected String filePath;                     // file address of the playable in the project
