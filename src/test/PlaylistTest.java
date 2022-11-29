@@ -46,23 +46,32 @@ public class PlaylistTest {
 
         dummyEvent = dummyList.next();
         assertEquals(dummyEvent.getDescription(), "Event log cleared.");
-        assertTrue(dummyEvent.equals(testEvent));
-        assertFalse(dummyEvent.equals(testEvent2));
-        assertFalse(dummyEvent.equals(testEvent3));
+        assertEquals(dummyEvent, testEvent);
+        assertNotEquals(dummyEvent, testEvent2);
+        assertNotEquals(dummyEvent, testEvent3);
+        assertEquals(dummyEvent.hashCode(), testEvent.hashCode());
+        assertNotEquals(dummyEvent.hashCode(), testEvent2.hashCode());
+        assertNotEquals(dummyEvent.hashCode(), testEvent3.hashCode());
         assertTrue(dummyList.hasNext());
 
         dummyEvent = dummyList.next();
-        assertFalse(dummyEvent.equals(testEvent));
-        assertTrue(dummyEvent.equals(testEvent2));
-        assertFalse(dummyEvent.equals(testEvent3));
+        assertNotEquals(dummyEvent, testEvent);
+        assertEquals(dummyEvent, testEvent2);
+        assertNotEquals(dummyEvent, testEvent3);
+        assertNotEquals(dummyEvent.hashCode(), testEvent.hashCode());
+        assertEquals(dummyEvent.hashCode(), testEvent2.hashCode());
+        assertNotEquals(dummyEvent.hashCode(), testEvent3.hashCode());
         assertEquals(dummyEvent.getDescription(),
                 "Added song (Future Nostalgia by Dua Lipa) to Playlist Test");
         assertTrue(dummyList.hasNext());
 
         dummyEvent = dummyList.next();
-        assertFalse(dummyEvent.equals(testEvent));
-        assertFalse(dummyEvent.equals(testEvent2));
-        assertTrue(dummyEvent.equals(testEvent3));
+        assertNotEquals(dummyEvent, testEvent);
+        assertNotEquals(dummyEvent, testEvent2);
+        assertEquals(dummyEvent, testEvent3);
+        assertNotEquals(dummyEvent.hashCode(), testEvent.hashCode());
+        assertNotEquals(dummyEvent.hashCode(), testEvent2.hashCode());
+        assertEquals(dummyEvent.hashCode(), testEvent3.hashCode());
         assertEquals(dummyEvent.getDescription(), "Added song "
                         + "(Levitating by Dua Lipa) to Playlist Test");
         assertFalse(dummyList.hasNext());
