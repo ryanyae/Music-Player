@@ -10,6 +10,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,108 +20,67 @@ import java.util.ArrayList;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-// Represents the frame that the user sees to interact with songs within our library
-public class BrowseSongMenuGUI {
+public class PlaySongGUI implements GUI {
 
-    JFrame mainFrame;
-    JPanel mainPanel;
-    JPanel topPanel;
-    JPanel buttonPanel;
+    JFrame frame;
+    JPanel songMainPanel;
+    JPanel songTitlePanel;
+    JPanel songButtonPanel;
+
+    Song song;
 
     Clip clip;
 
     SongState songState;
 
-    ArrayList<Song> allSongs;
+    ListOfPlaylists listOfPlaylists;
 
-    ListOfPlaylists currentPlaylists;
-    private static final String[] songs = {"Legends Never Die - Riot Games", "Awaken - Riot Games",
-            "One Kiss - Dua Lipa", "Levitating - Dua Lipa  ft.DaBaby", "Future Nostalgia - Dua Lipa"};
-    private final JList jofAllSongs = new JList(songs);
+    GUI obj;
 
-    @SuppressWarnings("methodlength")
-    // MODIFIES: this
-    // EFFECTS: is the menu that the user sees when trying to browse the song library
-    //          - the place where all the JFrame is made and edited
-    //          - consists all the buttons and event handlers for
-    //          - has a displays all songs that are in the library and gives the user the option to play any song
-    public BrowseSongMenuGUI(JFrame frame, JFrame frame2, ArrayList<Song> allSongs, ListOfPlaylists lop) {
-        this.mainFrame = frame2;
-        this.allSongs = allSongs;
-        this.currentPlaylists = lop;
-
-        this.mainFrame.setLocationRelativeTo(null);
-        this.mainFrame.setSize(300,200);
-        this.mainPanel = new JPanel();
-        this.topPanel = new JPanel();
-        this.buttonPanel = new JPanel();
-        JButton backButton = new JButton("back");
-
-        buttonPanel.add(backButton);
-        topPanel.add(jofAllSongs);
-
-        mainPanel.add(topPanel);
-        mainPanel.add(buttonPanel);
-
-        this.mainFrame.add(mainPanel);
-
-        this.mainFrame.setVisible(false);
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setVisible(false);
-                frame.setVisible(true);
-            }
-        });
-
-        // https://stackoverflow.com/questions/4344682/double-click-event-on-jlist-element
-        jofAllSongs.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JList list = jofAllSongs;
-
-                if (e.getClickCount() >= 2) {
-                    int index = list.locationToIndex(e.getPoint());
-                    playSongFrame(index);
-                }
-            }
-        });
+    public void setSong(Song song) {
+        this.song = song;
     }
 
-    // EFFECTS: the menu that the user will see when playing a song
-    //          - consists of buttons that allow the user to pause, resume, add to a playlist or back out this screen
-    //            and go back to the main browse song menu.
-    //          - backing out will also stop the music
-    private void playSongFrame(int index) {
-        JFrame playSongFrame = new JFrame();
-        JPanel songMainPanel = new JPanel();
-        JPanel songTitlePanel = new JPanel();
-        JPanel songButtonPanel = new JPanel();
+    public void setObj(GUI obj) {
+        this.obj = obj;
+    }
 
-        Song currentSong = allSongs.get(index);
+    public void view(JFrame frame) {
+        this.frame = frame;
+        this.frame.setSize(400, 300);
+        frame.setTitle("Playing " + song.getTitle() + " by " + song.getArtist().getName());
+        this.frame.getContentPane().removeAll();
+        addFeatures(song);
+        listOfPlaylists = ListOfPlaylists.getInstance();
 
-        playSongFrame.setLocationRelativeTo(null);
-        playSongFrame.setSize(400,300);
-        songTitlePanel(songMainPanel, songButtonPanel, currentSong);
-        songButtonPanel(playSongFrame, songMainPanel, songTitlePanel, currentSong);
-        playSongFrame.add(songMainPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+    }
+
+    private void addFeatures(Song currentSong) {
+
+        frame.setLayout(new GridLayout(0, 1));
+        songMainPanel = new JPanel();
+        songTitlePanel = new JPanel();
+        songButtonPanel = new JPanel();
+        frame.add(songMainPanel);
         playSong(currentSong);
-        playSongFrame.setVisible(true);
-        mainFrame.setVisible(false);
+
+        songTitlePanel(currentSong);
+        songButtonPanel(frame, songMainPanel, songTitlePanel, currentSong);
     }
 
     // MODIFIES: this
     // EFFECTS: adds to a JPanel that is the title and contents of the song
     //          - will also attach an image which is the song's cover art
-    private void songTitlePanel(JPanel songMainPanel, JPanel titlePanel, Song song) {
+    private void songTitlePanel(Song song) {
         JLabel titleLabel = new JLabel();
         JLabel image = new JLabel(new ImageIcon(song.getImagePath()));
         titleLabel.setText(song.getTitle() + " by " + song.getArtist().getName());
-        image.setSize(10,10);
-        titlePanel.add(image);
-        titlePanel.add(titleLabel);
-        songMainPanel.add(titlePanel);
+        image.setSize(8,8);
+        songButtonPanel.add(image);
+        songButtonPanel.add(titleLabel);
+        songMainPanel.add(songButtonPanel);
     }
 
     @SuppressWarnings("methodlength")
@@ -146,7 +106,7 @@ public class BrowseSongMenuGUI {
         buttonPanel.add(addButton);
 
         songMainPanel.add(buttonPanel);
-        
+
         resumeButton.setEnabled(false);
 
         addButton.addActionListener(new ActionListener() {
@@ -160,8 +120,7 @@ public class BrowseSongMenuGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clip.stop();
-                frame.setVisible(false);
-                mainFrame.setVisible(true);
+                obj.view(frame);
             }
         });
         resumeButton.addActionListener(new ActionListener() {
@@ -208,11 +167,10 @@ public class BrowseSongMenuGUI {
             playlistListOption.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    JList list = playlistListOption;
 
                     if (e.getClickCount() >= 2) {
-                        int index = list.locationToIndex(e.getPoint());
-                        currentPlaylists.getPlaylistByIndex(index).addToListOfSongs(song);
+                        int index = playlistListOption.locationToIndex(e.getPoint());
+                        listOfPlaylists.getPlaylistByIndex(index).addToListOfSongs(song);
                         playlistPopup.setVisible(false);
                         frame.setVisible(true);
                     }
@@ -242,16 +200,14 @@ public class BrowseSongMenuGUI {
     // EFFECTS: returns a dummyList of strings that represent songs within a playlist
     private ArrayList<String> printPlaylists() {
         ArrayList<String> dummyList = new ArrayList<>();
-        for (Playlist p:currentPlaylists.getAllPlaylists()) {
+        for (Playlist p:listOfPlaylists.getAllPlaylists()) {
             dummyList.add(p.getPlaylistTitle());
         }
         return dummyList;
     }
 
-    // MODIFIES: this
-    // EFFECTS: plays any given song with audio
-    private void playSong(Song playable) {
-        File musicFile = new File(playable.getFilePath());
+    public void playSong(Song song) {
+        File musicFile = new File(song.getFilePath());
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicFile);
             clip = AudioSystem.getClip();
@@ -260,11 +216,5 @@ public class BrowseSongMenuGUI {
         } catch (Exception error) {
             showMessageDialog(null, "Could not play this song, try again");
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the visibility of the main browse song menu according to a given boolean
-    public void setFrameVisible(Boolean b) {
-        this.mainFrame.setVisible(b);
     }
 }

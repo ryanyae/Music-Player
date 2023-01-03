@@ -146,10 +146,9 @@ public class PlaylistMenuGUI {
             jofCurrentPlaylists.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    JList list = jofCurrentPlaylists;
 
                     if (e.getClickCount() >= 2) {
-                        int index = list.locationToIndex(e.getPoint());
+                        int index = jofCurrentPlaylists.locationToIndex(e.getPoint());
                         mainFrame.setVisible(false);
                         menuForPlaylist(currentPlaylists.getPlaylistByIndex(index));
                     }

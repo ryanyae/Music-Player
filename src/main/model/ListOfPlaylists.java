@@ -10,10 +10,20 @@ import java.util.ArrayList;
 // Represents a list of playlists that the user may have, this user could have 0 playlist of 100.
 public class ListOfPlaylists implements Writable {
 
+    private static ListOfPlaylists lop;
+
     ArrayList<Playlist> allPlaylists;       // all the playlists of the user
 
+    public static ListOfPlaylists getInstance() {
+        if (lop == null) {
+            lop = new ListOfPlaylists();
+        }
+
+        return lop;
+    }
+
     // EFFECTS: creates a new ListOfPlaylists with an initially 0 playlists for the user.
-    public ListOfPlaylists() {
+    private ListOfPlaylists() {
         allPlaylists = new ArrayList<>();
     }
 

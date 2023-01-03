@@ -34,7 +34,7 @@ public class JsonRead {
     // EFFECTS: will parse a ListOfPlaylists from JSON object and returns it
     private ListOfPlaylists parseLOP(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("previousPlaylists");
-        ListOfPlaylists lop = new ListOfPlaylists();
+        ListOfPlaylists lop = ListOfPlaylists.getInstance();
         addPlaylists(lop, jsonArray);
         return lop;
     }

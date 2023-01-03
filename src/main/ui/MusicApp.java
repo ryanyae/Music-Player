@@ -61,7 +61,7 @@ public class MusicApp {
         boolean keepAlive = true;
         String userInput;
         input = new Scanner(System.in);
-        currentPlayLists = new ListOfPlaylists();
+        currentPlayLists = ListOfPlaylists.getInstance();
 
         System.out.println("Welcome, select a song to listen to from our very limited list of available songs!");
 

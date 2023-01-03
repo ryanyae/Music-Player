@@ -4,19 +4,10 @@ import model.*;
 import model.listofsongs.Playlist;
 import model.persistence.JsonRead;
 import model.persistence.JsonWrite;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,37 +36,29 @@ public class MainMenuGUI {
 
 
     // JFrame that is reserved for the main menu
-    JFrame frame;
+    static JFrame frame;
 
-    // JFrame that is reserved for the playlist menu
-    JFrame frame2;
-
-    // JFrame that is reserved for the song library
-    JFrame frame3; // song library menu frame
-
-    PlaylistMenuGUI playlistMenuObj;
-    BrowseSongMenuGUI browseSongMenuObj;
+    static PlaylistMenuGUI playlistMenuObj;
+    static NewBrowseSongMenuGUI browseSongMenuObj;
 
     // object that started the entire program
     @SuppressWarnings("methodlength")
     public MainMenuGUI() {
-        frame = new JFrame();
-        frame2 = new JFrame();
-        frame3 = new JFrame();
+        frame = new JFrame("Music Player");
+        viewMainMenu();
+    }
 
+    @SuppressWarnings("methodlength")
+    public static void viewMainMenu() {
         frame.setResizable(false);
-        frame2.setResizable(false);
-        frame3.setResizable(false);
-
         frame.setLocationRelativeTo(null);
-        playlistMenuObj = new PlaylistMenuGUI(frame, frame2, currentPlaylists);
-        browseSongMenuObj = new BrowseSongMenuGUI(frame, frame3, allSongs, currentPlaylists);
+
+        browseSongMenuObj = new NewBrowseSongMenuGUI();
 
         JButton playlistViewButton = new JButton("view all your playlists");
         JButton browseSongLibrary = new JButton("browse our song library");
         JButton savePlaylists = new JButton("save all your playlists");
         JButton loadPreviousPlaylists = new JButton("load your previous playlists");
-        JButton quitButton = new JButton("quit");
 
         GridLayout layout = new GridLayout(0, 2);
 
@@ -84,7 +67,6 @@ public class MainMenuGUI {
         frame.add(browseSongLibrary);
         frame.add(savePlaylists);
         frame.add(loadPreviousPlaylists);
-        frame.add(quitButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(450, 200);
@@ -107,8 +89,7 @@ public class MainMenuGUI {
         ActionListener browseSongAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-                browseSongMenuObj.setFrameVisible(true);
+                browseSongMenuObj.view(frame);
             }
         };
 
@@ -132,24 +113,12 @@ public class MainMenuGUI {
             }
         };
 
-        //https://stackoverflow.com/questions/8632705/how-to-close-a-gui-when-i-push-a-jbutton
-        // MODFIIES: this
-        // EFFECTS: will close the entire program
-        ActionListener quitAction = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LogPrinter lp = new LogPrinter();
-                lp.printLog(EventLog.getInstance());
-                System.exit(0);
-            }
-        };
-
         // https://www.youtube.com/watch?v=2lZqRZPgfQ4&ab_channel=choobtorials
         playlistViewButton.addActionListener(playlistAction);
         browseSongLibrary.addActionListener(browseSongAction);
         savePlaylists.addActionListener(savePlaylistAciton);
         loadPreviousPlaylists.addActionListener(loadPlaylistAction);
-        quitButton.addActionListener(quitAction);
+
     }
 
     @SuppressWarnings("methodlength")
@@ -188,7 +157,7 @@ public class MainMenuGUI {
 
     // MODIFIES: this
     // EFFECTS: will load all previous playlists to current playlists, and add it on top of already existing playlists
-    public void loadPreviousPlaylists() {
+    public static void loadPreviousPlaylists() {
         try {
             ArrayList<Playlist> loadingPlaylists = jsonReader.read().getAllPlaylists();
             for (Playlist p:loadingPlaylists) {
@@ -205,7 +174,7 @@ public class MainMenuGUI {
 
     // MODIFIES: this
     // EFFECTS: will save currentPlaylists to a JSON file that is readily readable
-    public void savePlaylist() {
+    public static void savePlaylist() {
         try {
             if (currentPlaylists.getLength() == 0) {
                 throw new Exception("No playlists to save");
@@ -224,9 +193,13 @@ public class MainMenuGUI {
 
     public static void main(String[] args) {
         initializeAllSongs();
-        currentPlaylists = new ListOfPlaylists();
+        currentPlaylists = ListOfPlaylists.getInstance();
         jsonWriter = new JsonWrite(JSON_PERSISTENCE);
         jsonReader = new JsonRead(JSON_PERSISTENCE);
         new MainMenuGUI();
+    }
+
+    public static ArrayList<Song> getAllSongs() {
+        return allSongs;
     }
 }
