@@ -28,7 +28,8 @@ public class NewBrowseSongMenuGUI implements GUI {
     public NewBrowseSongMenuGUI() {
         this.allSongs = MainMenuGUI.getAllSongs();
         this.currentPlaylists = ListOfPlaylists.getInstance();
-        psGUI = new PlaySongGUI();
+        psGUI = PlaySongGUI.getInstance();
+
     }
 
     public void view(JFrame frame) {

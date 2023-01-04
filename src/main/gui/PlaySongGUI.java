@@ -37,6 +37,20 @@ public class PlaySongGUI implements GUI {
 
     GUI obj;
 
+    static PlaySongGUI psGUI;
+
+    private PlaySongGUI() {
+
+    }
+
+    public static PlaySongGUI getInstance() {
+        if (psGUI == null) {
+            psGUI = new PlaySongGUI();
+        }
+
+        return psGUI;
+    }
+
     public void setSong(Song song) {
         this.song = song;
     }
@@ -44,6 +58,8 @@ public class PlaySongGUI implements GUI {
     public void setObj(GUI obj) {
         this.obj = obj;
     }
+
+
 
     public void view(JFrame frame) {
         this.frame = frame;

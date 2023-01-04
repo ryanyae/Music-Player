@@ -253,7 +253,7 @@ public class PlaylistMenuGUI {
 
         playSongFrame.setSize(400,300);
         songTitlePanel(songMainPanel, songButtonPanel, currentSong);
-        songButtonPanel(frame, playSongFrame, songMainPanel, songTitlePanel, currentSong);
+        songButtonPanel(frame, playSongFrame, songMainPanel, songTitlePanel);
         playSongFrame.add(songMainPanel);
         playSong(currentSong);
         playSongFrame.setVisible(true);
@@ -280,7 +280,7 @@ public class PlaylistMenuGUI {
     //            song.getSongState == SongState.PLAYING
     //          - the play button will resume the music, and will only be able to pressed while the
     //            song.getSongState == SongState.PAUSED
-    private void songButtonPanel(JFrame frame, JFrame frame2, JPanel songMainPanel, JPanel buttonPanel, Song song) {
+    private void songButtonPanel(JFrame frame, JFrame frame2, JPanel songMainPanel, JPanel buttonPanel) {
         songState = new SongState();
         JButton backButton = new JButton("back");
         JButton resumeButton = new JButton("play");

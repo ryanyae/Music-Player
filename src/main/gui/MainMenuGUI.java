@@ -38,7 +38,7 @@ public class MainMenuGUI {
     // JFrame that is reserved for the main menu
     static JFrame frame;
 
-    static PlaylistMenuGUI playlistMenuObj;
+    static ViewPlaylistMenuGUI playlistMenuObj;
     static NewBrowseSongMenuGUI browseSongMenuObj;
 
     // object that started the entire program
@@ -53,6 +53,7 @@ public class MainMenuGUI {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
+        playlistMenuObj = new ViewPlaylistMenuGUI();
         browseSongMenuObj = new NewBrowseSongMenuGUI();
 
         JButton playlistViewButton = new JButton("view all your playlists");
@@ -78,8 +79,7 @@ public class MainMenuGUI {
         ActionListener playlistAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-                playlistMenuObj.setFrameVisible(true);
+                playlistMenuObj.view(frame);
             }
         };
 
