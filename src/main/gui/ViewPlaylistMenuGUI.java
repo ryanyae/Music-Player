@@ -152,6 +152,7 @@ public class ViewPlaylistMenuGUI implements GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 singlePlaylistMenu.setVisible(false);
+                frame.setVisible(true);
             }
         });
 

@@ -1,22 +1,10 @@
-{"previousPlaylists": [
-    {
-        "title": "1234",
-        "playables": [{
-            "imagePath": "./data/awakenCoverArt.jpg",
-            "filePath": "./data/League Of Legends - Awaken.wav",
-            "maker": {"name": "Riot Games"},
-            "title": "Awaken",
-            "featuredArtists": []
-        }]
-    },
-    {
-        "title": "1234",
-        "playables": [{
-            "imagePath": "./data/awakenCoverArt.jpg",
-            "filePath": "./data/League Of Legends - Awaken.wav",
-            "maker": {"name": "Riot Games"},
-            "title": "Awaken",
-            "featuredArtists": []
-        }]
-    }
-]}
+{"previousPlaylists": [{
+    "title": "1234",
+    "playables": [{
+        "imagePath": "./data/legendsNeverDieCoverArt.jpeg",
+        "filePath": "./data/Legends-Never-Die.wav",
+        "maker": {"name": "Riot Games"},
+        "title": "Legends Never Die",
+        "featuredArtists": []
+    }]
+}]}

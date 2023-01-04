@@ -160,15 +160,16 @@ public class MainMenuGUI {
     public static void loadPreviousPlaylists() {
         try {
             ArrayList<Playlist> loadingPlaylists = jsonReader.read().getAllPlaylists();
+            playlistMenuObj.getTopPanel().remove(0);
             for (Playlist p:loadingPlaylists) {
                 currentPlaylists.addNewPlaylist(p);
             }
-            playlistMenuObj.getTopPanel().remove(0);
             playlistMenuObj.updateVisiblePlaylists();
+            System.out.println("hi");
             System.out.println("\n" + "Loaded all playlists from " + JSON_PERSISTENCE
                     + "\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println(e);;
         }
     }
 
